@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SAI — Search AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Tenor+Sans&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<meta name="description" content="SAI - Search AI: An elegant AI-powered search interface"/>
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #faf8f4;
+    --cream: #f0ece3;
+    --gold: #b08a3e;
+    --gold-light: #d4a85a;
+    --deep: #1a1410;
+    --muted: #7a7468;
+    --border: #e2ddd4;
+    --code-bg: #111009;
+    --code-text: #e8dfc8;
+    --green: #2d6a4f;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600; font-size: 1.35rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .nav-logo sup {
+    font-size: 0.55rem; color: var(--gold);
+    letter-spacing: 0.2em; vertical-align: super;
+    font-family: 'Tenor Sans', sans-serif;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { background: var(--ink) !important; color: var(--paper) !important; padding: 0.5rem 1.4rem; }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--paper) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 10rem 4rem 6rem; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero-bg-circle {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(176,138,62,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-bg-ring {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px; height: 500px; border-radius: 50%;
+    border: 1px solid rgba(176,138,62,0.12);
+    pointer-events: none; animation: ringPulse 4s ease-in-out infinite;
+  }
+  .hero-bg-ring2 {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 800px; border-radius: 50%;
+    border: 1px solid rgba(176,138,62,0.06);
+    pointer-events: none; animation: ringPulse 4s ease-in-out 1s infinite;
+  }
+  @keyframes ringPulse {
+    0%,100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%,-50%) scale(1.03); }
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease 0.1s both;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block; width: 28px; height: 1px; background: var(--gold);
+  }
+  .hero-logo-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(5rem, 12vw, 9rem);
+    font-weight: 300; letter-spacing: 0.08em; line-height: 1; color: var(--ink);
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+  .hero-logo-mark em { font-style: italic; color: var(--gold); }
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    font-weight: 300; color: var(--muted); letter-spacing: 0.04em;
+    margin-top: 1rem; margin-bottom: 0.5rem;
+    animation: fadeUp 0.9s ease 0.35s both;
+  }
+  .hero-sub {
+    font-size: 0.82rem; letter-spacing: 0.04em; color: var(--muted);
+    max-width: 560px; line-height: 1.9; margin: 1.5rem auto 3rem;
+    animation: fadeUp 0.9s ease 0.45s both;
+  }
+  .hero-btns {
+    display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.9s ease 0.55s both;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.95rem 2.4rem;
+    font-family: 'Tenor Sans', sans-serif;
+    font-size: 0.72rem; text-decoration: none;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    transition: all 0.25s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  .btn-primary:hover { background: var(--gold); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .btn-outline:hover { background: var(--ink); color: var(--paper); }
+
+  /* MARKET BAR */
+  .market-bar {
+    background: var(--deep); color: var(--paper);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .market-stat {
+    padding: 3rem 2rem; text-align: center;
+    border-right: 1px solid #222;
+  }
+  .market-stat:last-child { border-right: none; }
+  .market-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem; font-weight: 300; color: var(--gold-light);
+    display: block; line-height: 1; margin-bottom: 0.6rem;
+  }
+  .market-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: #666; line-height: 1.6; }
+  .market-sub { font-size: 0.7rem; color: #444; margin-top: 0.4rem; font-family: 'Cormorant Garamond', serif; font-style: italic; }
+
+  /* SECTIONS */
+  section { padding: 7rem 4rem; }
+  .section-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400; font-size: clamp(2.2rem, 4vw, 3.4rem);
+    line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1.2rem;
+  }
+  h2 em { font-style: italic; color: var(--gold); }
+  .lead {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 300; color: var(--muted);
+    line-height: 1.9; max-width: 680px;
+  }
+
+  /* PROBLEM */
+  .problem-section { background: var(--cream); }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 4rem; align-items: start; }
+  .problem-block h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 1rem;
+  }
+  .problem-block p { color: var(--muted); font-size: 0.88rem; line-height: 1.9; }
+  .problem-points { list-style: none; margin-top: 1.5rem; }
+  .problem-points li {
+    padding: 0.8rem 0; border-bottom: 1px solid var(--border);
+    font-size: 0.84rem; display: flex; gap: 1rem; align-items: baseline; color: var(--muted);
+  }
+  .problem-points li::before { content: '—'; color: var(--gold); }
+  .problem-points li:last-child { border-bottom: none; }
+  .opportunity-block {
+    background: var(--ink); color: var(--paper); padding: 3rem;
+  }
+  .opportunity-block h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+    font-weight: 300; font-style: italic; color: var(--gold-light); margin-bottom: 1rem;
+  }
+  .opportunity-block p { font-size: 0.84rem; color: #aaa; line-height: 1.9; }
+  .opportunity-block .big-stat {
+    font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 300;
+    color: var(--gold-light); line-height: 1; margin: 2rem 0 0.5rem;
+  }
+  .opportunity-block .big-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: #555; }
+
+  /* FEATURES */
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; margin-top: 4rem; border: 1px solid var(--border); background: var(--border);
+  }
+  .feature-card {
+    background: var(--paper); padding: 3rem 2.5rem; transition: background 0.2s;
+  }
+  .feature-card:hover { background: var(--cream); }
+  .feature-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 0.78rem;
+    color: var(--gold); letter-spacing: 0.15em; margin-bottom: 1.2rem; display: block;
+  }
+  .feature-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+  .feature-card h3 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.2rem; margin-bottom: 0.75rem;
+  }
+  .feature-card p { color: var(--muted); font-size: 0.81rem; line-height: 1.8; }
+  .feature-tags { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.2rem 0.6rem; border: 1px solid var(--border); color: var(--muted);
+  }
+
+  /* TRACTION */
+  .traction-section { background: var(--deep); color: var(--paper); }
+  .traction-section .section-eyebrow { color: var(--gold-light); }
+  .traction-section .section-eyebrow::before { background: var(--gold-light); }
+  .traction-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+  .traction-card { border: 1px solid #2a2620; padding: 2.5rem; }
+  .traction-card .t-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300;
+    color: var(--gold-light); display: block; line-height: 1;
+  }
+  .traction-card h4 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #ccc; margin: 0.5rem 0 0.75rem;
+  }
+  .traction-card p { font-size: 0.78rem; color: #666; line-height: 1.7; }
+
+  /* FLOW */
+  .flow-section { background: var(--cream); }
+  .flow-steps {
+    margin-top: 4rem; display: grid; grid-template-columns: repeat(5, 1fr);
+    position: relative;
+  }
+  .flow-steps::before {
+    content: ''; position: absolute; top: 1.35rem; left: 10%; right: 10%;
+    height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .flow-step { padding: 0 1rem; text-align: center; }
+  .flow-circle {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--cream); border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--gold);
+    margin: 0 auto 1.5rem;
+  }
+  .flow-step h4 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;
+  }
+  .flow-step p { font-size: 0.74rem; color: var(--muted); line-height: 1.6; }
+
+  /* API */
+  .api-section { background: var(--paper); }
+  .api-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+  .endpoint-list { border: 1px solid var(--border); }
+  .endpoint {
+    padding: 1.1rem 1.5rem; border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background 0.15s;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .endpoint:last-child { border-bottom: none; }
+  .endpoint:hover, .endpoint.active { background: var(--ink); color: var(--paper); }
+  .method {
+    font-size: 0.6rem; letter-spacing: 0.1em;
+    padding: 0.2rem 0.5rem; min-width: 42px; text-align: center;
+  }
+  .method.get { background: rgba(45,106,79,0.12); color: var(--green); }
+  .method.post { background: rgba(176,138,62,0.12); color: var(--gold); }
+  .endpoint:hover .method, .endpoint.active .method { background: rgba(255,255,255,0.1); color: #bbb; }
+  .endpoint-path { font-size: 0.78rem; font-family: 'DM Mono', monospace; }
+  .endpoint-desc { margin-left: auto; font-size: 0.68rem; color: var(--muted); }
+  .endpoint:hover .endpoint-desc, .endpoint.active .endpoint-desc { color: #777; }
+  .code-panel {
+    background: var(--code-bg); padding: 2rem; border: 1px solid #222; position: sticky; top: 8rem;
+  }
+  .code-panel pre {
+    color: var(--code-text); font-family: 'DM Mono', monospace;
+    font-size: 0.76rem; line-height: 1.85; white-space: pre-wrap;
+  }
+
+  /* CATEGORIES */
+  .cat-section { background: var(--deep); }
+  .cat-section .section-eyebrow { color: var(--gold-light); }
+  .cat-section .section-eyebrow::before { background: var(--gold-light); }
+  .cat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px; margin-top: 3.5rem; background: #1e1c18; border: 1px solid #1e1c18;
+  }
+  .cat-card { background: var(--deep); padding: 2.2rem 2rem; transition: background 0.2s; }
+  .cat-card:hover { background: #1a1710; }
+  .cat-emoji { font-size: 1.8rem; margin-bottom: 1rem; display: block; }
+  .cat-card h4 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1rem; color: #ccc; margin-bottom: 0.75rem;
+  }
+  .kw {
+    display: inline-block; font-size: 0.6rem; letter-spacing: 0.08em;
+    padding: 0.15rem 0.45rem; border: 1px solid #2a2820; color: #555;
+    margin: 0.15rem 0.1rem;
+  }
+
+  /* SCHEMA */
+  .schema-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 3.5rem; }
+  .schema-box { border: 1px solid var(--border); }
+  .schema-header {
+    background: var(--ink); color: var(--paper); padding: 0.9rem 1.5rem;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .badge { background: var(--gold); color: var(--deep); font-size: 0.58rem; padding: 0.15rem 0.5rem; }
+  .schema-fields { padding: 1.5rem; }
+  .field-row {
+    display: grid; grid-template-columns: 115px 75px 1fr;
+    gap: 0.8rem; padding: 0.55rem 0; border-bottom: 1px solid var(--cream);
+    font-size: 0.75rem; align-items: start;
+  }
+  .field-row:last-child { border-bottom: none; }
+  .field-name { color: var(--ink); font-family: 'DM Mono', monospace; font-size: 0.71rem; }
+  .field-type { color: var(--green); font-size: 0.68rem; font-family: 'DM Mono', monospace; }
+  .field-desc { color: var(--muted); font-size: 0.71rem; }
+
+  /* USE CASES */
+  .usecase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+  .usecase-card { background: var(--paper); border: 1px solid var(--border); padding: 2.5rem; }
+  .usecase-card .uc-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300;
+    color: var(--border); line-height: 1; display: block; margin-bottom: 1rem;
+  }
+  .usecase-card h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 0.75rem;
+  }
+  .usecase-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.8; }
+
+  /* AUTH */
+  .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+  .auth-info h3 {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem;
+  }
+  .auth-info p { color: var(--muted); font-size: 0.84rem; line-height: 1.9; margin-bottom: 1rem; }
+  .auth-steps { list-style: none; }
+  .auth-steps li {
+    padding: 0.8rem 0; border-bottom: 1px solid var(--border);
+    font-size: 0.82rem; display: flex; gap: 1rem; align-items: baseline; color: var(--muted);
+  }
+  .auth-steps li::before {
+    content: attr(data-n);
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic;
+    color: var(--gold); min-width: 1.5rem;
+  }
+
+  /* QUERY EXAMPLES */
+  .query-examples {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem; margin-top: 3rem;
+  }
+  .query-card { background: var(--paper); border: 1px solid var(--border); padding: 1.8rem; transition: border-color 0.2s; }
+  .query-card:hover { border-color: var(--gold); }
+  .query-text {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.05rem; margin-bottom: 0.8rem; color: var(--ink); line-height: 1.5;
+  }
+  .query-meta { font-size: 0.68rem; letter-spacing: 0.06em; color: var(--muted); }
+  .query-meta span { color: var(--gold); }
+
+  /* INVEST */
+  .invest-section {
+    background: var(--deep); color: var(--paper);
+    text-align: center; padding: 9rem 4rem; position: relative; overflow: hidden;
+  }
+  .invest-bg {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 900px; height: 900px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(176,138,62,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .invest-section .section-eyebrow { color: var(--gold); justify-content: center; }
+  .invest-section h2 { color: var(--paper); font-size: clamp(2.5rem, 5vw, 4rem); max-width: 700px; margin: 0 auto 1.5rem; }
+  .invest-section > p { color: #888; font-size: 0.88rem; max-width: 540px; margin: 0 auto 3rem; line-height: 1.9; }
+  .invest-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    max-width: 760px; margin: 0 auto 4rem; background: #1e1c18; border: 1px solid #1e1c18;
+  }
+  .invest-item { background: var(--deep); padding: 2rem; }
+  .invest-item .i-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300;
+    color: var(--gold-light); display: block; line-height: 1;
+  }
+  .invest-item .i-label {
+    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: #555;
+    margin-top: 0.4rem; display: block;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); color: #444; padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid #1a1a1a;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--paper);
+  }
+  .footer-logo em { font-style: italic; color: var(--gold); }
+  footer p { font-size: 0.68rem; letter-spacing: 0.04em; line-height: 1.8; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    nav { padding: 1rem 1.5rem; }
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 8rem 1.5rem 5rem; }
+    .problem-grid, .api-grid, .schema-grid, .auth-grid { grid-template-columns: 1fr; }
+    .features-grid, .traction-grid, .usecase-grid { grid-template-columns: 1fr 1fr; }
+    .flow-steps { grid-template-columns: 1fr 1fr 1fr; }
+    .market-bar { grid-template-columns: 1fr 1fr; }
+    .invest-grid { grid-template-columns: 1fr; max-width: 320px; }
+  }
+  @media (max-width: 600px) {
+    .features-grid, .traction-grid, .usecase-grid, .cat-grid { grid-template-columns: 1fr; }
+    .flow-steps { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SAI<sup>Search AI</sup></div>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#product">Product</a></li>
+    <li><a href="#traction">Traction</a></li>
+    <li><a href="#queries">100 Queries</a></li>
+    <li><a href="#api">API</a></li>
+
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle"></div>
+  <div class="hero-bg-ring"></div>
+  <div class="hero-bg-ring2"></div>
+  <div class="hero-logo-mark">S<em>AI</em></div>
+  <div class="hero-tagline">Search AI — The Intelligence Layer for Financial Data</div>
+  <p class="hero-sub">SAI transforms raw transaction history into a queryable knowledge base. Ask <em>"How much did I spend on food last month?"</em> and get instant, structured answers — powered by semantic vector search, purpose-built for fintech.</p>
+  <div class="hero-btns">
+    <a href="#product" class="btn btn-primary">Explore the Product →</a>
+    <a href="#api" class="btn btn-outline">View API Docs</a>
+  </div>
+</section>
+
+<!-- MARKET -->
+<div class="market-bar">
+  <div class="market-stat">
+    <span class="market-num">$14B</span>
+    <div class="market-label">Personal Finance<br>Software Market</div>
+    <div class="market-sub">Growing at 6.4% CAGR</div>
+  </div>
+  <div class="market-stat">
+    <span class="market-num">2.5B</span>
+    <div class="market-label">Banked consumers<br>without spend insights</div>
+    <div class="market-sub">Underserved by legacy tools</div>
+  </div>
+  <div class="market-stat">
+    <span class="market-num">384x</span>
+    <div class="market-label">Richer context vs.<br>keyword search</div>
+    <div class="market-sub">Vector dimension advantage</div>
+  </div>
+  <div class="market-stat">
+    <span class="market-num">&lt;200ms</span>
+    <div class="market-label">Median query<br>response time</div>
+    <div class="market-sub">Production-grade latency</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem" class="problem-section">
+  <div class="section-eyebrow">The Problem</div>
+  <div class="problem-grid">
+    <div class="problem-block">
+      <h2>People can't <em>understand</em><br>their own spending</h2>
+      <p>Financial data exists. Insight doesn't. People generate thousands of transactions per year but have no natural way to interrogate that history.</p>
+      <ul class="problem-points">
+        <li>Legacy banking apps offer static, uncustomisable category views</li>
+        <li>Spreadsheet exports require manual filtering and pivot tables</li>
+        <li>Keyword search misses context — "fuel" won't find "Shell Top-Up"</li>
+        <li>No product understands temporal language: "last 3 months of dining"</li>
+        <li>Enterprise analytics tools are priced out of consumer and SMB reach</li>
+      </ul>
+    </div>
+    <div class="opportunity-block">
+      <h3>The opportunity we're seizing</h3>
+      <p>Large language models made natural language interfaces mainstream. Vector databases made semantic search fast and cheap. SAI combines both into a single, embeddable API that any fintech, neobank, or wealth app can integrate within a day.</p>
+      <div class="big-stat">$4.2B</div>
+      <div class="big-label">Addressable market in AI-powered personal finance tools by 2028</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section id="product" style="padding:7rem 4rem">
+  <div class="section-eyebrow">The Product</div>
+  <h2>Eight capabilities.<br><em>One elegant API.</em></h2>
+  <p class="lead">SAI is a semantic transaction search engine — a drop-in API that turns any financial data source into a conversational, queryable intelligence layer.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-num">01</span>
+      <span class="feature-icon">🔍</span>
+      <h3>Semantic Search</h3>
+      <p>Natural language queries encoded into 384-dimensional vectors using <code>all-MiniLM-L6-v2</code>. Cosine-similarity search retrieves contextually relevant transactions, not just keyword matches.</p>
+      <div class="feature-tags"><span class="tag">SentenceTransformers</span><span class="tag">Cosine Similarity</span><span class="tag">Milvus</span></div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">02</span>
+      <span class="feature-icon">📅</span>
+      <h3>Temporal Intelligence</h3>
+      <p>Understands <em>last week</em>, <em>last 30 days</em>, <em>last year</em>, <em>January 2024</em> — and builds precise Milvus filter expressions scoped to the correct date ranges automatically.</p>
+      <div class="feature-tags"><span class="tag">Regex Parsing</span><span class="tag">dateutil</span><span class="tag">Dynamic Filters</span></div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">03</span>
+      <span class="feature-icon">🏷️</span>
+      <h3>Auto-Categorisation</h3>
+      <p>A priority-weighted keyword engine assigns spending categories from merchant names in real time. Handles fuzzy matching, compound categories, and graceful fallback to "Other."</p>
+      <div class="feature-tags"><span class="tag">Keyword Rules</span><span class="tag">Priority Engine</span><span class="tag">7 Categories</span></div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">04</span>
+      <span class="feature-icon">📊</span>
+      <h3>Spend Analytics</h3>
+      <p>Every query returns merchant-level groupings, totals, and transaction counts. The <code>/api/summary</code> endpoint provides a full spend breakdown ready to visualise in any charting library.</p>
+      <div class="feature-tags"><span class="tag">Aggregation</span><span class="tag">Google Charts Ready</span></div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">05</span>
+      <span class="feature-icon">📂</span>
+      <h3>CSV Ingestion Pipeline</h3>
+      <p>Upload any bank export. SAI auto-maps column name variants, parses multiple date formats, generates embeddings, and stores records into a personal Milvus collection — end-to-end in one request.</p>
+      <div class="feature-tags"><span class="tag">File Upload</span><span class="tag">Column Auto-Map</span><span class="tag">Multi-format Dates</span></div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">06</span>
+      <span class="feature-icon">🔐</span>
+      <h3>Multi-Tenant by Design</h3>
+      <p>Each API key maps to an isolated Milvus collection. User data never mingles. The architecture is multi-tenant from line one — ready to scale to millions of users without redesign.</p>
+      <div class="feature-tags"><span class="tag">API Key Auth</span><span class="tag">Namespaced Collections</span><span class="tag">Data Isolation</span></div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">07</span>
+      <span class="feature-icon">⚡</span>
+      <h3>Async-First Architecture</h3>
+      <p>All Milvus operations run via <code>asyncio.to_thread</code>. Non-blocking I/O throughout. FastAPI dependency injection keeps the codebase clean and latency low under concurrent load.</p>
+      <div class="feature-tags"><span class="tag">FastAPI</span><span class="tag">Async/Await</span><span class="tag">Non-blocking</span></div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-num">08</span>
+      <span class="feature-icon">🏆</span>
+      <h3>Highest Spend Detection</h3>
+      <p>Every result surfaces the top merchant automatically. Transaction results are ranked by total spend — the primitive needed for budget alerts, anomaly detection, and personalised nudges.</p>
+      <div class="feature-tags"><span class="tag">Merchant Ranking</span><span class="tag">Max Aggregation</span></div>
+    </div>
+    <div class="feature-card" style="background:var(--ink)">
+      <span class="feature-num" style="color:var(--gold-light)">+</span>
+      <span class="feature-icon">🛣️</span>
+      <h3 style="color:var(--paper); font-family:'Cormorant Garamond',serif">Roadmap</h3>
+      <p style="color:#666">Recurring charge detection · Anomaly alerts · LLM-generated summaries · Open Banking integrations · Real-time streaming · White-label dashboard</p>
+      <div class="feature-tags"><span class="tag" style="border-color:#2a2a2a;color:#555">Coming Soon</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="flow-section">
+  <div class="section-eyebrow">Architecture</div>
+  <h2>Five steps from<br><em>query to insight</em></h2>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-circle">I</div>
+      <h4>Query Received</h4>
+      <p>Natural language arrives at <code>/api/search</code> with an API key in the header.</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">II</div>
+      <h4>Parse Intent</h4>
+      <p>Regex and keyword rules extract the date range and spending category from the query.</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">III</div>
+      <h4>Vector Encoding</h4>
+      <p>The query is encoded into a 384-dim float16 vector by the MiniLM model.</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">IV</div>
+      <h4>Hybrid Search</h4>
+      <p>Milvus combines cosine similarity with scalar date and category filters — top 100 hits returned.</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">V</div>
+      <h4>Aggregate & Return</h4>
+      <p>Results grouped by merchant, totals computed, highest spend surfaced, response serialised.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRACTION -->
+<section id="traction" class="traction-section">
+  <div class="section-eyebrow">Traction & Validation</div>
+  <h2 style="color:var(--paper)">Early signals that <em>matter</em></h2>
+  <div class="traction-grid">
+    <div class="traction-card">
+      <span class="t-num">v1.0</span>
+      <h4>Production API shipped</h4>
+      <p>Full async REST API with 9 endpoints, authentication, ingestion pipeline, and analytics — running on Milvus and FastAPI in production.</p>
+    </div>
+    <div class="traction-card">
+      <span class="t-num">7</span>
+      <h4>Spend categories covered</h4>
+      <p>Shopping, Groceries, Food & Dining, Transportation, Entertainment, Utilities, and Gas — with an extensible keyword taxonomy.</p>
+    </div>
+    <div class="traction-card">
+      <span class="t-num">∞</span>
+      <h4>Natural language queries</h4>
+      <p>No query schema required. Temporal, categorical, and free-form questions all resolved against the same vector index.</p>
+    </div>
+  </div>
+</section>
+
+<!-- API REFERENCE -->
+<section id="api" style="padding:7rem 4rem; background:var(--cream)">
+  <div class="section-eyebrow">Developer Experience</div>
+  <h2>Nine endpoints.<br><em>Zero friction.</em></h2>
+  <div class="api-grid">
+    <div class="endpoint-list">
+      <div class="endpoint active" onclick="showCode(this,'search')"><span class="method post">POST</span><span class="endpoint-path">/api/search</span><span class="endpoint-desc">Semantic search</span></div>
+      <div class="endpoint" onclick="showCode(this,'summary')"><span class="method get">GET</span><span class="endpoint-path">/api/summary</span><span class="endpoint-desc">Spend overview</span></div>
+      <div class="endpoint" onclick="showCode(this,'transactions')"><span class="method get">GET</span><span class="endpoint-path">/api/transactions</span><span class="endpoint-desc">Filtered list</span></div>
+      <div class="endpoint" onclick="showCode(this,'ingest')"><span class="method post">POST</span><span class="endpoint-path">/api/ingest</span><span class="endpoint-desc">Upload CSV</span></div>
+      <div class="endpoint" onclick="showCode(this,'status')"><span class="method get">GET</span><span class="endpoint-path">/api/ingest/status</span><span class="endpoint-desc">Ingest status</span></div>
+      <div class="endpoint" onclick="showCode(this,'categories')"><span class="method get">GET</span><span class="endpoint-path">/api/categories</span><span class="endpoint-desc">List categories</span></div>
+      <div class="endpoint" onclick="showCode(this,'search_form')"><span class="method post">POST</span><span class="endpoint-path">/search</span><span class="endpoint-desc">Form search</span></div>
+      <div class="endpoint" onclick="showCode(this,'result')"><span class="method post">POST</span><span class="endpoint-path">/result</span><span class="endpoint-desc">HTML result view</span></div>
+      <div class="endpoint" onclick="showCode(this,'root')"><span class="method get">GET</span><span class="endpoint-path">/</span><span class="endpoint-desc">Index UI</span></div>
+    </div>
+    <div class="code-panel">
+      <pre id="code-output">// POST /api/search  ·  Requires: X-API-Key
+
+Request Body:
+{
+  "query": "food expenses last month",
+  "limit": 20
+}
+
+Response:
+{
+  "results": [
+    {
+      "merchant": "Starbucks",
+      "category": "Food & Dining",
+      "amount": 42.50,
+      "month": "February",
+      "day": "14",
+      "year": "2025"
+    }
+  ],
+  "query": "food expenses last month"
+}</pre>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="cat-section">
+  <div class="section-eyebrow">Taxonomy</div>
+  <h2 style="color:var(--paper)">Seven categories,<br><em>intelligently assigned</em></h2>
+  <div class="cat-grid">
+    <div class="cat-card"><span class="cat-emoji">🛒</span><h4>Shopping</h4><div><span class="kw">amazon</span><span class="kw">apple</span><span class="kw">purchase</span></div></div>
+    <div class="cat-card"><span class="cat-emoji">🥦</span><h4>Groceries</h4><div><span class="kw">grocery</span><span class="kw">supermarket</span><span class="kw">whole foods</span></div></div>
+    <div class="cat-card"><span class="cat-emoji">🍽️</span><h4>Food & Dining</h4><div><span class="kw">restaurant</span><span class="kw">starbucks</span><span class="kw">mcdonald</span></div></div>
+    <div class="cat-card"><span class="cat-emoji">🚌</span><h4>Transportation</h4><div><span class="kw">uber</span><span class="kw">ola</span><span class="kw">taxi</span><span class="kw">bus</span></div></div>
+    <div class="cat-card"><span class="cat-emoji">🎬</span><h4>Entertainment</h4><div><span class="kw">netflix</span><span class="kw">movie</span><span class="kw">concert</span></div></div>
+    <div class="cat-card"><span class="cat-emoji">⚡</span><h4>Utilities</h4><div><span class="kw">electricity</span><span class="kw">internet</span><span class="kw">wifi</span></div></div>
+    <div class="cat-card"><span class="cat-emoji">⛽</span><h4>Gas</h4><div><span class="kw">petrol</span><span class="kw">diesel</span><span class="kw">lpg</span><span class="kw">fuel</span></div></div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section style="padding:7rem 4rem; background:var(--cream)">
+  <div class="section-eyebrow">Use Cases</div>
+  <h2>Who builds with <em>SAI</em></h2>
+  <div class="usecase-grid">
+    <div class="usecase-card"><span class="uc-num">01</span><h3>Neobanks & Fintechs</h3><p>Embed SAI as a natural language layer on top of transaction history. Give customers a conversational way to understand their money — a differentiator against legacy banks.</p></div>
+    <div class="usecase-card"><span class="uc-num">02</span><h3>Wealth & PFM Apps</h3><p>Replace rigid category dashboards with semantic search. Users ask open questions; SAI returns structured, chart-ready data without any schema design on the app side.</p></div>
+    <div class="usecase-card"><span class="uc-num">03</span><h3>SMB Accounting Tools</h3><p>Small business owners query expense history in plain English: <em>"Show all supplier payments in Q3."</em> No SQL, no accountant required.</p></div>
+  </div>
+</section>
+
+<!-- QUERY EXPLORER -->
+<section id="queries" style="padding:7rem 4rem">
+  <div class="section-eyebrow">Query Intelligence</div>
+  <h2>100 questions SAI<br><em>understands</em></h2>
+  <p class="lead" style="margin-bottom:3rem">From simple balance checks to complex trend analysis — SAI parses natural language across six intent categories and maps each query to the right search, filter, and aggregation strategy.</p>
+
+  <style>
+    .qtab-bar {
+      display: flex; gap: 0; border: 1px solid var(--border);
+      overflow-x: auto; margin-bottom: 0;
+    }
+    .qtab {
+      padding: 0.85rem 1.4rem; cursor: pointer;
+      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); border-right: 1px solid var(--border);
+      white-space: nowrap; transition: all 0.15s; background: var(--paper);
+      border-bottom: 2px solid transparent;
+    }
+    .qtab:last-child { border-right: none; }
+    .qtab:hover { color: var(--ink); background: var(--cream); }
+    .qtab.active { color: var(--ink); background: var(--cream); border-bottom: 2px solid var(--gold); }
+    .qtab-panel { display: none; }
+    .qtab-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-top: none; }
+    .qcard {
+      background: var(--paper); padding: 1.4rem 1.6rem;
+      transition: background 0.15s; cursor: default;
+    }
+    .qcard:hover { background: var(--cream); }
+    .qcard-num { font-size: 0.6rem; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 0.4rem; display: block; }
+    .qcard-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.98rem; color: var(--ink); line-height: 1.5; margin-bottom: 0.5rem; }
+    .qcard-tag {
+      display: inline-block; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.15rem 0.5rem; border: 1px solid var(--border); color: var(--muted);
+    }
+    .qcard-tag.supported { border-color: rgba(45,106,79,0.3); color: var(--green); background: rgba(45,106,79,0.04); }
+    .qcard-tag.partial { border-color: rgba(176,138,62,0.3); color: var(--gold); background: rgba(176,138,62,0.04); }
+    .qtab-count {
+      display: inline-block; background: var(--ink); color: var(--paper);
+      font-size: 0.55rem; padding: 0.1rem 0.4rem; margin-left: 0.3rem;
+      vertical-align: middle;
+    }
+    .qtab.active .qtab-count { background: var(--gold); }
+  </style>
+
+  <div class="qtab-bar">
+    <div class="qtab active" onclick="switchTab(this,'basic')">Basic <span class="qtab-count">10</span></div>
+    <div class="qtab" onclick="switchTab(this,'transaction')">Transaction-Specific <span class="qtab-count">10</span></div>
+    <div class="qtab" onclick="switchTab(this,'date')">Date-Based <span class="qtab-count">10</span></div>
+    <div class="qtab" onclick="switchTab(this,'category')">Category-Based <span class="qtab-count">10</span></div>
+    <div class="qtab" onclick="switchTab(this,'trend')">Trends &amp; Comparison <span class="qtab-count">10</span></div>
+    <div class="qtab" onclick="switchTab(this,'advanced')">Advanced &amp; Complex <span class="qtab-count">50</span></div>
+  </div>
+
+  <!-- BASIC -->
+  <div class="qtab-panel active" id="tab-basic">
+    <div class="qcard"><span class="qcard-num">01</span><div class="qcard-text">"What is my current account balance?"</div><span class="qcard-tag supported">Balance Lookup</span></div>
+    <div class="qcard"><span class="qcard-num">02</span><div class="qcard-text">"How much did I spend last month?"</div><span class="qcard-tag supported">Date Filter · Aggregation</span></div>
+    <div class="qcard"><span class="qcard-num">03</span><div class="qcard-text">"What are my last five transactions?"</div><span class="qcard-tag supported">Limit · Recency Sort</span></div>
+    <div class="qcard"><span class="qcard-num">04</span><div class="qcard-text">"How much did I deposit this week?"</div><span class="qcard-tag supported">Date Filter · Type Filter</span></div>
+    <div class="qcard"><span class="qcard-num">05</span><div class="qcard-text">"How much did I withdraw in the last 7 days?"</div><span class="qcard-tag supported">Last N Days · Debit Filter</span></div>
+    <div class="qcard"><span class="qcard-num">06</span><div class="qcard-text">"What was my highest transaction this month?"</div><span class="qcard-tag supported">Max Aggregation · Month Filter</span></div>
+    <div class="qcard"><span class="qcard-num">07</span><div class="qcard-text">"What was my lowest transaction this month?"</div><span class="qcard-tag supported">Min Aggregation · Month Filter</span></div>
+    <div class="qcard"><span class="qcard-num">08</span><div class="qcard-text">"How many times did I use my debit card this month?"</div><span class="qcard-tag supported">Count · Card Type Filter</span></div>
+    <div class="qcard"><span class="qcard-num">09</span><div class="qcard-text">"How many times did I use my credit card this month?"</div><span class="qcard-tag supported">Count · Card Type Filter</span></div>
+    <div class="qcard"><span class="qcard-num">10</span><div class="qcard-text">"Did I receive my paycheck deposit?"</div><span class="qcard-tag supported">Semantic Search · Credit Match</span></div>
+  </div>
+
+  <!-- TRANSACTION SPECIFIC -->
+  <div class="qtab-panel" id="tab-transaction">
+    <div class="qcard"><span class="qcard-num">11</span><div class="qcard-text">"How much did I spend at Amazon last month?"</div><span class="qcard-tag supported">Merchant Filter · Date Range</span></div>
+    <div class="qcard"><span class="qcard-num">12</span><div class="qcard-text">"What was my last transaction at Walmart?"</div><span class="qcard-tag supported">Merchant Search · Recency Sort</span></div>
+    <div class="qcard"><span class="qcard-num">13</span><div class="qcard-text">"Can you show all transactions from Starbucks?"</div><span class="qcard-tag supported">Merchant Filter · Full History</span></div>
+    <div class="qcard"><span class="qcard-num">14</span><div class="qcard-text">"Did I get charged twice for my last Uber ride?"</div><span class="qcard-tag supported">Duplicate Detection · Merchant</span></div>
+    <div class="qcard"><span class="qcard-num">15</span><div class="qcard-text">"When was my last refund from PayPal?"</div><span class="qcard-tag supported">Refund Filter · Merchant</span></div>
+    <div class="qcard"><span class="qcard-num">16</span><div class="qcard-text">"What is the largest amount I spent in a single transaction?"</div><span class="qcard-tag supported">Max Amount · Global</span></div>
+    <div class="qcard"><span class="qcard-num">17</span><div class="qcard-text">"What was my last online purchase?"</div><span class="qcard-tag supported">Semantic Search · Recency</span></div>
+    <div class="qcard"><span class="qcard-num">18</span><div class="qcard-text">"How much did I spend on food last week?"</div><span class="qcard-tag supported">Category · Last Week</span></div>
+    <div class="qcard"><span class="qcard-num">19</span><div class="qcard-text">"Did I get charged for Netflix this month?"</div><span class="qcard-tag supported">Merchant · Month Filter</span></div>
+    <div class="qcard"><span class="qcard-num">20</span><div class="qcard-text">"Show me all my ATM withdrawals this month?"</div><span class="qcard-tag supported">Type Filter · Month</span></div>
+  </div>
+
+  <!-- DATE BASED -->
+  <div class="qtab-panel" id="tab-date">
+    <div class="qcard"><span class="qcard-num">21</span><div class="qcard-text">"What were my transactions on January 10th?"</div><span class="qcard-tag supported">Exact Date · Day Filter</span></div>
+    <div class="qcard"><span class="qcard-num">22</span><div class="qcard-text">"Show me all my transactions for the last six months."</div><span class="qcard-tag supported">Rolling 6-Month Window</span></div>
+    <div class="qcard"><span class="qcard-num">23</span><div class="qcard-text">"How much did I spend during the holiday season?"</div><span class="qcard-tag supported">Semantic · Dec Date Range</span></div>
+    <div class="qcard"><span class="qcard-num">24</span><div class="qcard-text">"What was my balance at the beginning of this year?"</div><span class="qcard-tag supported">Point-in-Time Balance</span></div>
+    <div class="qcard"><span class="qcard-num">25</span><div class="qcard-text">"What are my transactions for the last three days?"</div><span class="qcard-tag supported">Last N Days Filter</span></div>
+    <div class="qcard"><span class="qcard-num">26</span><div class="qcard-text">"How much did I spend in Q1 of this year?"</div><span class="qcard-tag supported">Quarter Filter · Year</span></div>
+    <div class="qcard"><span class="qcard-num">27</span><div class="qcard-text">"Show me all transactions from the last weekend."</div><span class="qcard-tag supported">Weekend Date Calc</span></div>
+    <div class="qcard"><span class="qcard-num">28</span><div class="qcard-text">"What were my expenses on my birthday?"</div><span class="qcard-tag partial">Specific Date · User Profile</span></div>
+    <div class="qcard"><span class="qcard-num">29</span><div class="qcard-text">"How many transactions did I make in December?"</div><span class="qcard-tag supported">Month · Count Aggregation</span></div>
+    <div class="qcard"><span class="qcard-num">30</span><div class="qcard-text">"Show me my total deposits for the last six months."</div><span class="qcard-tag supported">Credit · Rolling 6-Month</span></div>
+  </div>
+
+  <!-- CATEGORY BASED -->
+  <div class="qtab-panel" id="tab-category">
+    <div class="qcard"><span class="qcard-num">31</span><div class="qcard-text">"How much did I spend on groceries this month?"</div><span class="qcard-tag supported">Category · Month Aggregate</span></div>
+    <div class="qcard"><span class="qcard-num">32</span><div class="qcard-text">"Show me all my entertainment expenses for the last three months."</div><span class="qcard-tag supported">Category · 3-Month Window</span></div>
+    <div class="qcard"><span class="qcard-num">33</span><div class="qcard-text">"How much have I spent on travel this year?"</div><span class="qcard-tag supported">Category · YTD Sum</span></div>
+    <div class="qcard"><span class="qcard-num">34</span><div class="qcard-text">"What is my biggest expense category this month?"</div><span class="qcard-tag supported">Category Ranking · Max</span></div>
+    <div class="qcard"><span class="qcard-num">35</span><div class="qcard-text">"How much did I spend on subscriptions in the last year?"</div><span class="qcard-tag supported">Recurring · Annual Sum</span></div>
+    <div class="qcard"><span class="qcard-num">36</span><div class="qcard-text">"How much do I spend on fuel every month?"</div><span class="qcard-tag supported">Gas Category · Monthly Avg</span></div>
+    <div class="qcard"><span class="qcard-num">37</span><div class="qcard-text">"Show me all my medical expenses from last year."</div><span class="qcard-tag supported">Category · Annual Filter</span></div>
+    <div class="qcard"><span class="qcard-num">38</span><div class="qcard-text">"How much did I spend on rent this year?"</div><span class="qcard-tag supported">Utilities Category · YTD</span></div>
+    <div class="qcard"><span class="qcard-num">39</span><div class="qcard-text">"What is my average grocery bill per month?"</div><span class="qcard-tag supported">Category · Monthly Average</span></div>
+    <div class="qcard"><span class="qcard-num">40</span><div class="qcard-text">"How much did I spend on shopping last Black Friday?"</div><span class="qcard-tag supported">Shopping · Specific Date</span></div>
+  </div>
+
+  <!-- TRENDS -->
+  <div class="qtab-panel" id="tab-trend">
+    <div class="qcard"><span class="qcard-num">41</span><div class="qcard-text">"Did I spend more on food this month than last month?"</div><span class="qcard-tag supported">MoM Comparison · Category</span></div>
+    <div class="qcard"><span class="qcard-num">42</span><div class="qcard-text">"Compare my total spending for the last three months."</div><span class="qcard-tag supported">Multi-Month Aggregation</span></div>
+    <div class="qcard"><span class="qcard-num">43</span><div class="qcard-text">"What is my average monthly spending?"</div><span class="qcard-tag supported">Rolling Average · All Time</span></div>
+    <div class="qcard"><span class="qcard-num">44</span><div class="qcard-text">"Did I save more money this year than last year?"</div><span class="qcard-tag supported">YoY Savings Comparison</span></div>
+    <div class="qcard"><span class="qcard-num">45</span><div class="qcard-text">"Has my spending on dining increased over time?"</div><span class="qcard-tag supported">Trend Analysis · Category</span></div>
+    <div class="qcard"><span class="qcard-num">46</span><div class="qcard-text">"What is my highest-spending category in the last six months?"</div><span class="qcard-tag supported">Category Rank · 6-Month</span></div>
+    <div class="qcard"><span class="qcard-num">47</span><div class="qcard-text">"How much more did I spend on travel this year vs. last year?"</div><span class="qcard-tag supported">YoY Delta · Category</span></div>
+    <div class="qcard"><span class="qcard-num">48</span><div class="qcard-text">"How do my expenses in Q1 compare to Q2?"</div><span class="qcard-tag supported">Quarter-over-Quarter</span></div>
+    <div class="qcard"><span class="qcard-num">49</span><div class="qcard-text">"Did I earn more in the last quarter than the previous one?"</div><span class="qcard-tag supported">QoQ Income Comparison</span></div>
+    <div class="qcard"><span class="qcard-num">50</span><div class="qcard-text">"What's the trend of my monthly savings?"</div><span class="qcard-tag supported">Time Series · Savings</span></div>
+  </div>
+
+  <!-- ADVANCED -->
+  <div class="qtab-panel" id="tab-advanced">
+    <div class="qcard"><span class="qcard-num">51</span><div class="qcard-text">"Find all transactions above $500 from the last year."</div><span class="qcard-tag supported">Amount Threshold · Date</span></div>
+    <div class="qcard"><span class="qcard-num">52</span><div class="qcard-text">"Which months did I spend more than $5,000?"</div><span class="qcard-tag supported">Monthly Sum · Threshold</span></div>
+    <div class="qcard"><span class="qcard-num">53</span><div class="qcard-text">"Identify any duplicate transactions in my statement."</div><span class="qcard-tag supported">Duplicate Detection</span></div>
+    <div class="qcard"><span class="qcard-num">54</span><div class="qcard-text">"What was my lowest balance in the last six months?"</div><span class="qcard-tag supported">Min Balance · Rolling</span></div>
+    <div class="qcard"><span class="qcard-num">55</span><div class="qcard-text">"List all transactions where I was charged a fee."</div><span class="qcard-tag supported">Fee Detection · Semantic</span></div>
+    <div class="qcard"><span class="qcard-num">56</span><div class="qcard-text">"Total amount spent using credit card last year."</div><span class="qcard-tag supported">Card Type · Annual Sum</span></div>
+    <div class="qcard"><span class="qcard-num">57</span><div class="qcard-text">"Show me all international transactions in my statement."</div><span class="qcard-tag supported">Geo Filter · Semantic</span></div>
+    <div class="qcard"><span class="qcard-num">58</span><div class="qcard-text">"How much was my total cashback last year?"</div><span class="qcard-tag supported">Cashback Filter · Annual</span></div>
+    <div class="qcard"><span class="qcard-num">59</span><div class="qcard-text">"What is my average spend per transaction?"</div><span class="qcard-tag supported">Mean · All Transactions</span></div>
+    <div class="qcard"><span class="qcard-num">60</span><div class="qcard-text">"List transactions where merchant name contains 'Gym'."</div><span class="qcard-tag supported">Merchant Substring Match</span></div>
+    <div class="qcard"><span class="qcard-num">61</span><div class="qcard-text">"Show all transactions from locations outside my city."</div><span class="qcard-tag partial">Geo Enrichment · Flag</span></div>
+    <div class="qcard"><span class="qcard-num">62</span><div class="qcard-text">"Were there any transactions from a new device?"</div><span class="qcard-tag partial">Device Metadata · Security</span></div>
+    <div class="qcard"><span class="qcard-num">63</span><div class="qcard-text">"Did I make any purchases late at night?"</div><span class="qcard-tag supported">Time-of-Day Filter</span></div>
+    <div class="qcard"><span class="qcard-num">64</span><div class="qcard-text">"Were there any failed transactions on my card?"</div><span class="qcard-tag supported">Status Filter · Failed</span></div>
+    <div class="qcard"><span class="qcard-num">65</span><div class="qcard-text">"Show me all transactions flagged as unusual."</div><span class="qcard-tag supported">Anomaly Flag Filter</span></div>
+    <div class="qcard"><span class="qcard-num">66</span><div class="qcard-text">"Did I ever get charged by an unknown merchant?"</div><span class="qcard-tag supported">Merchant Anomaly · Semantic</span></div>
+    <div class="qcard"><span class="qcard-num">67</span><div class="qcard-text">"Are there unexpected recurring charges in my statement?"</div><span class="qcard-tag supported">Recurring Detection</span></div>
+    <div class="qcard"><span class="qcard-num">68</span><div class="qcard-text">"Show me transactions from a new country."</div><span class="qcard-tag partial">Country Metadata · New</span></div>
+    <div class="qcard"><span class="qcard-num">69</span><div class="qcard-text">"Are there any unauthorized charges on my account?"</div><span class="qcard-tag supported">Fraud Detection · Semantic</span></div>
+    <div class="qcard"><span class="qcard-num">70</span><div class="qcard-text">"Were there any refunds I did not request?"</div><span class="qcard-tag supported">Refund Anomaly · Semantic</span></div>
+    <div class="qcard"><span class="qcard-num">71</span><div class="qcard-text">"What is my total outstanding credit card balance?"</div><span class="qcard-tag supported">Credit Card · Balance</span></div>
+    <div class="qcard"><span class="qcard-num">72</span><div class="qcard-text">"How much interest did I pay on my credit card last year?"</div><span class="qcard-tag supported">Interest Filter · Annual</span></div>
+    <div class="qcard"><span class="qcard-num">73</span><div class="qcard-text">"What is my average credit card bill per month?"</div><span class="qcard-tag supported">Monthly Average · Card</span></div>
+    <div class="qcard"><span class="qcard-num">74</span><div class="qcard-text">"How much of my credit limit have I used?"</div><span class="qcard-tag supported">Utilisation Ratio</span></div>
+    <div class="qcard"><span class="qcard-num">75</span><div class="qcard-text">"How much did I pay in credit card fees last year?"</div><span class="qcard-tag supported">Fee Filter · Annual</span></div>
+    <div class="qcard"><span class="qcard-num">76</span><div class="qcard-text">"When is my next credit card payment due?"</div><span class="qcard-tag partial">Billing Cycle · Predictive</span></div>
+    <div class="qcard"><span class="qcard-num">77</span><div class="qcard-text">"Show me all late payments in my statement."</div><span class="qcard-tag supported">Late Payment Filter</span></div>
+    <div class="qcard"><span class="qcard-num">78</span><div class="qcard-text">"How much have I spent on my credit card this year?"</div><span class="qcard-tag supported">Card Type · YTD Sum</span></div>
+    <div class="qcard"><span class="qcard-num">79</span><div class="qcard-text">"What was my largest credit card bill?"</div><span class="qcard-tag supported">Max Bill · All Time</span></div>
+    <div class="qcard"><span class="qcard-num">80</span><div class="qcard-text">"Show me my past due transactions."</div><span class="qcard-tag supported">Status Filter · Overdue</span></div>
+    <div class="qcard"><span class="qcard-num">81</span><div class="qcard-text">"How much did I save last month?"</div><span class="qcard-tag supported">Income minus Spend · Month</span></div>
+    <div class="qcard"><span class="qcard-num">82</span><div class="qcard-text">"What percentage of my income do I spend each month?"</div><span class="qcard-tag supported">Spend Ratio · Monthly</span></div>
+    <div class="qcard"><span class="qcard-num">83</span><div class="qcard-text">"How much should I save to meet my financial goals?"</div><span class="qcard-tag partial">Goal Calc · User Input</span></div>
+    <div class="qcard"><span class="qcard-num">84</span><div class="qcard-text">"Did I overspend my budget this month?"</div><span class="qcard-tag partial">Budget Comparison · Month</span></div>
+    <div class="qcard"><span class="qcard-num">85</span><div class="qcard-text">"How much do I have left in my budget?"</div><span class="qcard-tag partial">Remaining Budget Calc</span></div>
+    <div class="qcard"><span class="qcard-num">86</span><div class="qcard-text">"What is my average monthly savings?"</div><span class="qcard-tag supported">Rolling Savings Average</span></div>
+    <div class="qcard"><span class="qcard-num">87</span><div class="qcard-text">"How much did I save in the last five years?"</div><span class="qcard-tag supported">5-Year Savings Sum</span></div>
+    <div class="qcard"><span class="qcard-num">88</span><div class="qcard-text">"How much did I spend compared to my income?"</div><span class="qcard-tag supported">Spend vs Income Ratio</span></div>
+    <div class="qcard"><span class="qcard-num">89</span><div class="qcard-text">"What is my highest saving month?"</div><span class="qcard-tag supported">Max Savings · Monthly</span></div>
+    <div class="qcard"><span class="qcard-num">90</span><div class="qcard-text">"How much do I need to save to reach $10,000?"</div><span class="qcard-tag partial">Goal Gap Calculation</span></div>
+    <div class="qcard"><span class="qcard-num">91</span><div class="qcard-text">"Predict my spending for the next three months."</div><span class="qcard-tag partial">Predictive · ML Required</span></div>
+    <div class="qcard"><span class="qcard-num">92</span><div class="qcard-text">"Based on my habits, when will I reach my savings goal?"</div><span class="qcard-tag partial">Forecast · Goal Timeline</span></div>
+    <div class="qcard"><span class="qcard-num">93</span><div class="qcard-text">"Identify patterns in my spending behavior."</div><span class="qcard-tag supported">Pattern Mining · Semantic</span></div>
+    <div class="qcard"><span class="qcard-num">94</span><div class="qcard-text">"What percentage of my expenses are non-essential?"</div><span class="qcard-tag supported">Category Classification</span></div>
+    <div class="qcard"><span class="qcard-num">95</span><div class="qcard-text">"Recommend cost-cutting measures based on my transactions."</div><span class="qcard-tag partial">AI Recommendations</span></div>
+    <div class="qcard"><span class="qcard-num">96</span><div class="qcard-text">"Identify anomalies in my financial transactions."</div><span class="qcard-tag supported">Anomaly Detection</span></div>
+    <div class="qcard"><span class="qcard-num">97</span><div class="qcard-text">"How much have I paid in taxes from my bank transactions?"</div><span class="qcard-tag supported">Tax Keyword · Sum</span></div>
+    <div class="qcard"><span class="qcard-num">98</span><div class="qcard-text">"What are my top 10 merchants by total spending?"</div><span class="qcard-tag supported">Merchant Rank · Top-N</span></div>
+    <div class="qcard"><span class="qcard-num">99</span><div class="qcard-text">"Can you summarize my entire financial year in highlights?"</div><span class="qcard-tag supported">Annual Summary · Semantic</span></div>
+    <div class="qcard"><span class="qcard-num">100</span><div class="qcard-text">"Generate a report on my financial habits with improvement suggestions."</div><span class="qcard-tag partial">AI Report · Roadmap</span></div>
+  </div>
+
+  <div style="margin-top:2rem; display:flex; gap:1.5rem; align-items:center; font-size:0.72rem; color:var(--muted)">
+    <span><span style="display:inline-block;width:8px;height:8px;background:rgba(45,106,79,0.5);border-radius:50%;margin-right:0.4rem;vertical-align:middle"></span>Supported in v1.0</span>
+    <span><span style="display:inline-block;width:8px;height:8px;background:rgba(176,138,62,0.5);border-radius:50%;margin-right:0.4rem;vertical-align:middle"></span>Partial — on roadmap</span>
+  </div>
+
+  <script>
+    function switchTab(el, key) {
+      document.querySelectorAll('.qtab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.qtab-panel').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('tab-' + key).classList.add('active');
+    }
+  </script>
+</section>
+
+<!-- SCHEMA -->
+<section style="padding:7rem 4rem; background:var(--cream)">
+  <div class="section-eyebrow">Data Model</div>
+  <h2>Built on a <em>precise</em> schema</h2>
+  <div class="schema-grid">
+    <div class="schema-box">
+      <div class="schema-header">Milvus Collection Schema <span class="badge">COSINE · AUTOINDEX</span></div>
+      <div class="schema-fields">
+        <div class="field-row"><span class="field-name">id</span><span class="field-type">INT64</span><span class="field-desc">Auto-generated primary key</span></div>
+        <div class="field-row"><span class="field-name">text</span><span class="field-type">VARCHAR</span><span class="field-desc">Formatted text used for embedding</span></div>
+        <div class="field-row"><span class="field-name">year</span><span class="field-type">INT64</span><span class="field-desc">Transaction year — used in scalar filters</span></div>
+        <div class="field-row"><span class="field-name">month</span><span class="field-type">VARCHAR</span><span class="field-desc">Month name e.g. "January"</span></div>
+        <div class="field-row"><span class="field-name">day</span><span class="field-type">INT64</span><span class="field-desc">Day of month</span></div>
+        <div class="field-row"><span class="field-name">merchant</span><span class="field-type">VARCHAR</span><span class="field-desc">Business or merchant name</span></div>
+        <div class="field-row"><span class="field-name">category</span><span class="field-type">VARCHAR</span><span class="field-desc">Detected or provided category</span></div>
+        <div class="field-row"><span class="field-name">amount</span><span class="field-type">FLOAT</span><span class="field-desc">Transaction value</span></div>
+        <div class="field-row"><span class="field-name">embedding</span><span class="field-type">FLOAT_VEC</span><span class="field-desc">384-dim cosine vector</span></div>
+      </div>
+    </div>
+    <div class="schema-box">
+      <div class="schema-header">CSV Ingestion — Accepted Column Names <span class="badge">AUTO-MAP</span></div>
+      <div class="schema-fields">
+        <div class="field-row"><span class="field-name">date</span><span class="field-type">mapped</span><span class="field-desc">Date, date, Transaction Date, trans_date</span></div>
+        <div class="field-row"><span class="field-name">merchant</span><span class="field-type">mapped</span><span class="field-desc">Merchant_Name, Merchant, Description</span></div>
+        <div class="field-row"><span class="field-name">category</span><span class="field-type">mapped</span><span class="field-desc">Category, category, Type, type</span></div>
+        <div class="field-row"><span class="field-name">amount</span><span class="field-type">mapped</span><span class="field-desc">Amount, amount, Value, Debit, debit</span></div>
+        <div class="field-row"><span class="field-name">date formats</span><span class="field-type">parsed</span><span class="field-desc">YYYY-MM-DD · MM/DD/YYYY · DD/MM/YYYY · DD-MM-YYYY</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTH -->
+<section id="auth" style="padding:7rem 4rem">
+  <div class="section-eyebrow">Security</div>
+  <h2>Isolation by <em>design</em></h2>
+  <div class="auth-grid">
+    <div class="auth-info">
+      <h3>Per-user data architecture</h3>
+      <p>Every API key deterministically maps to an isolated Milvus collection. No cross-contamination between users is architecturally possible — not just a policy, a structural guarantee.</p>
+      <p>The collection name is derived as <code>transactions_{api_key[:16]}</code> — lightweight, collision-resistant, never storing the full key server-side.</p>
+      <ul class="auth-steps">
+        <li data-n="1">Obtain your API key and include it as <code>X-API-Key</code></li>
+        <li data-n="2">Upload your CSV via <code>POST /api/ingest</code></li>
+        <li data-n="3">Your Milvus collection is auto-created and indexed</li>
+        <li data-n="4">All queries are scoped exclusively to your collection</li>
+        <li data-n="5">Monitor status at <code>GET /api/ingest/status</code></li>
+      </ul>
+    </div>
+    <div class="code-panel">
+<pre style="color:var(--code-text)"><span style="color:#3a3530">// Include in every authenticated request</span>
+
+Headers:
+  X-API-Key: your_api_key_here
+  Content-Type: application/json
+
+<span style="color:#3a3530">// Collection scoped to your key</span>
+<span style="color:#b08a3e">"transactions_" + api_key[:16]</span>
+
+<span style="color:#3a3530">// Verify data is loaded</span>
+GET /api/ingest/status
+
+{
+  <span style="color:#b08a3e">"status"</span>: <span style="color:#d4a85a">"ready"</span>,
+  <span style="color:#b08a3e">"record_count"</span>: <span style="color:#a8d8a8">1842</span>,
+  <span style="color:#b08a3e">"collection"</span>: <span style="color:#d4a85a">"transactions_sk_live_a1b2"</span>
+}</pre>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div>
+    <div class="footer-logo">S<em>AI</em> — Search <em>AI</em></div>
+    <p style="margin-top:0.5rem">Semantic transaction intelligence · FastAPI · Milvus · SentenceTransformers</p>
+  </div>
+  <p style="text-align:right">© 2025 SAI Technologies<br><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="41282f372432350132242033222920286f282e">[email&#160;protected]</a></p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const codes = {
+  search:`// POST /api/search  ·  Requires: X-API-Key
+
+Request Body:
+{
+  "query": "food expenses last month",
+  "limit": 20
+}
+
+Response:
+{
+  "results": [
+    {
+      "merchant": "Starbucks",
+      "category": "Food & Dining",
+      "amount": 42.50,
+      "month": "February",
+      "day": "14",
+      "year": "2025"
+    }
+  ],
+  "query": "food expenses last month"
+}`,
+  summary:`// GET /api/summary  ·  Requires: X-API-Key
+
+Response:
+{
+  "total_spending": 3241.75,
+  "transaction_count": 48,
+  "by_category": {
+    "Food & Dining": 820.00,
+    "Transportation": 310.50,
+    "Shopping": 1450.25
+  },
+  "by_merchant": [
+    { "merchant": "Amazon",    "amount": 980.00 },
+    { "merchant": "Starbucks", "amount": 145.25 }
+  ]
+}`,
+  transactions:`// GET /api/transactions  ·  Requires: X-API-Key
+// Params: limit, category, year
+
+GET /api/transactions?category=Groceries&year=2024
+
+Response:
+{
+  "results": [
+    {
+      "merchant": "Whole Foods",
+      "category": "Groceries",
+      "amount": 87.40,
+      "count": 3
+    }
+  ]
+}`,
+  ingest:`// POST /api/ingest  ·  Requires: X-API-Key
+// Content-Type: multipart/form-data
+
+Fields:
+  file            → transactions.csv
+  clear_existing  → true (default)
+
+Accepted CSV Columns:
+  Date / Transaction Date / trans_date
+  Merchant_Name / Merchant / Description
+  Category / Type
+  Amount / Debit / Value
+
+Response:
+{
+  "status": "success",
+  "records_processed": 312,
+  "records_inserted": 312,
+  "collection": "transactions_sk_live_abc12"
+}`,
+  status:`// GET /api/ingest/status  ·  Requires: X-API-Key
+
+Response (ready):
+{
+  "status": "ready",
+  "record_count": 1842,
+  "collection": "transactions_sk_live_abc12"
+}
+
+Response (not initialised):
+{
+  "status": "not_initialized",
+  "record_count": 0
+}`,
+  categories:`// GET /api/categories  ·  No auth required
+
+Response:
+{
+  "categories": [
+    "Shopping",
+    "Groceries",
+    "Food & Dining",
+    "Transportation",
+    "Entertainment",
+    "Utilities",
+    "Gas"
+  ]
+}`,
+  search_form:`// POST /search
+// Content-Type: application/x-www-form-urlencoded
+
+Form Fields:
+  search_str: "uber rides last week"
+
+Response:
+[
+  {
+    "name": "Uber",
+    "category": "Transportation",
+    "totalAmount": 58.90,
+    "transactions": 4
+  }
+]`,
+  result:`// POST /result
+// Content-Type: application/x-www-form-urlencoded
+// Returns: Jinja2 HTML (results.html)
+
+Form Fields:
+  user_input: "amazon spending 2024"
+
+Template context:
+  total      → float
+  chart_data → JSON (Google Charts format)
+  query      → string
+  category   → string
+  highest    → { name, amount }`,
+  root:`// GET /
+// Returns: Jinja2 HTML (index.html)
+// No authentication required.
+
+Template context:
+  title   → "Standard Example"
+  content → "This is standard content."
+
+Entry po
