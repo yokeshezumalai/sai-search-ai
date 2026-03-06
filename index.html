@@ -455,7 +455,7 @@
     <li><a href="#problem">Problem</a></li>
     <li><a href="#product">Product</a></li>
     <li><a href="#traction">Traction</a></li>
-    <li><a href="#queries">100 Queries</a></li>
+    <li><a href="#queries">Queries</a></li>
     <li><a href="#api">API</a></li>
 
   </ul>
@@ -723,193 +723,62 @@ Response:
 <!-- QUERY EXPLORER -->
 <section id="queries" style="padding:7rem 4rem">
   <div class="section-eyebrow">Query Intelligence</div>
-  <h2>100 questions SAI<br><em>understands</em></h2>
-  <p class="lead" style="margin-bottom:3rem">From simple spending checks to complex budget analysis — SAI parses natural language across multiple intent categories and helps you track expenses, analyze spending patterns, and manage your finances effortlessly.</p>
+  <h2>Questions SAI<br><em>understands</em></h2>
+  <p class="lead" style="margin-bottom:3rem">From simple spending checks to complex budget analysis — SAI parses natural language across multiple categories and helps you track expenses, analyze spending patterns, and manage your finances effortlessly.</p>
 
   <style>
-    .qtab-bar {
-      display: flex; gap: 0; border: 1px solid var(--border);
-      overflow-x: auto; margin-bottom: 0;
+    .qgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
     }
-    .qtab {
-      padding: 0.85rem 1.4rem; cursor: pointer;
-      font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--muted); border-right: 1px solid var(--border);
-      white-space: nowrap; transition: all 0.15s; background: var(--paper);
-      border-bottom: 2px solid transparent;
-    }
-    .qtab:last-child { border-right: none; }
-    .qtab:hover { color: var(--ink); background: var(--cream); }
-    .qtab.active { color: var(--ink); background: var(--cream); border-bottom: 2px solid var(--gold); }
-    .qtab-panel { display: none; }
-    .qtab-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-top: none; }
     .qcard {
-      background: var(--paper); padding: 1.4rem 1.6rem;
+      background: var(--paper); padding: 1.2rem 1.4rem;
       transition: background 0.15s; cursor: default;
     }
     .qcard:hover { background: var(--cream); }
-    .qcard-num { font-size: 0.6rem; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 0.4rem; display: block; }
-    .qcard-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.98rem; color: var(--ink); line-height: 1.5; margin-bottom: 0.5rem; }
+    .qcard-num { font-size: 0.6rem; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 0.3rem; display: block; }
+    .qcard-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.95rem; color: var(--ink); line-height: 1.5; margin-bottom: 0.4rem; }
     .qcard-tag {
-      display: inline-block; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.15rem 0.5rem; border: 1px solid var(--border); color: var(--muted);
+      display: inline-block; font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.12rem 0.4rem; border: 1px solid var(--border); color: var(--muted);
     }
-    .qcard-tag.supported { border-color: rgba(45,106,79,0.3); color: var(--green); background: rgba(45,106,79,0.04); }
-    .qcard-tag.partial { border-color: rgba(176,138,62,0.3); color: var(--gold); background: rgba(176,138,62,0.04); }
-    .qtab-count {
-      display: inline-block; background: var(--ink); color: var(--paper);
-      font-size: 0.55rem; padding: 0.1rem 0.4rem; margin-left: 0.3rem;
-      vertical-align: middle;
-    }
-    .qtab.active .qtab-count { background: var(--gold); }
   </style>
 
-  <div class="qtab-bar">
-    <div class="qtab active" onclick="switchTab(this,'spending')">Spending <span class="qtab-count">20</span></div>
-    <div class="qtab" onclick="switchTab(this,'income')">Income <span class="qtab-count">10</span></div>
-    <div class="qtab" onclick="switchTab(this,'category')">Category <span class="qtab-count">20</span></div>
-    <div class="qtab" onclick="switchTab(this,'merchant')">Merchant <span class="qtab-count">15</span></div>
-    <div class="qtab" onclick="switchTab(this,'date')">Date-Based <span class="qtab-count">15</span></div>
-    <div class="qtab" onclick="switchTab(this,'budget')">Budget <span class="qtab-count">20</span></div>
+  <div class="qgrid">
+    <div class="qcard"><span class="qcard-num">01</span><div class="qcard-text">"How much did I spend this month?"</div><span class="qcard-tag">Total Spending</span></div>
+    <div class="qcard"><span class="qcard-num">02</span><div class="qcard-text">"How much did I spend on groceries?"</div><span class="qcard-tag">Groceries</span></div>
+    <div class="qcard"><span class="qcard-num">03</span><div class="qcard-text">"How much did I spend on gas?"</div><span class="qcard-tag">Fuel</span></div>
+    <div class="qcard"><span class="qcard-num">04</span><div class="qcard-text">"How much on dining out?"</div><span class="qcard-tag">Restaurants</span></div>
+    <div class="qcard"><span class="qcard-num">05</span><div class="qcard-text">"How much did I spend on Netflix?"</div><span class="qcard-tag">Subscription</span></div>
+    <div class="qcard"><span class="qcard-num">06</span><div class="qcard-text">"Amount spent on Amazon this month"</div><span class="qcard-tag">Shopping</span></div>
+    <div class="qcard"><span class="qcard-num">07</span><div class="qcard-text">"How much did I spend at Walmart?"</div><span class="qcard-tag">Walmart</span></div>
+    <div class="qcard"><span class="qcard-num">08</span><div class="qcard-text">"What did I spend on utilities?"</div><span class="qcard-tag">Bills</span></div>
+    <div class="qcard"><span class="qcard-num">09</span><div class="qcard-text">"How much did I spend on groceries last week?"</div><span class="qcard-tag">Grocery · Weekly</span></div>
+    <div class="qcard"><span class="qcard-num">10</span><div class="qcard-text">"How much did I spend on food?"</div><span class="qcard-tag">Food</span></div>
+    <div class="qcard"><span class="qcard-num">11</span><div class="qcard-text">"How much at Starbucks?"</div><span class="qcard-tag">Coffee</span></div>
+    <div class="qcard"><span class="qcard-num">12</span><div class="qcard-text">"How much did I spend on Amazon?"</div><span class="qcard-tag">Shopping</span></div>
+    <div class="qcard"><span class="qcard-num">13</span><div class="qcard-text">"What were my shopping expenses?"</div><span class="qcard-tag">Shopping</span></div>
+    <div class="qcard"><span class="qcard-num">14</span><div class="qcard-text">"How much on subscriptions?"</div><span class="qcard-tag">Recurring</span></div>
+    <div class="qcard"><span class="qcard-num">15</span><div class="qcard-text">"How much did I spend on travel?"</div><span class="qcard-tag">Travel</span></div>
+    <div class="qcard"><span class="qcard-num">16</span><div class="qcard-text">"How much did I spend on entertainment?"</div><span class="qcard-tag">Entertainment</span></div>
+    <div class="qcard"><span class="qcard-num">17</span><div class="qcard-text">"How much at Target?"</div><span class="qcard-tag">Target</span></div>
+    <div class="qcard"><span class="qcard-num">18</span><div class="qcard-text">"What did I spend on healthcare?"</div><span class="qcard-tag">Medical</span></div>
+    <div class="qcard"><span class="qcard-num">19</span><div class="qcard-text">"How much did I spend on clothing?"</div><span class="qcard-tag">Apparel</span></div>
+    <div class="qcard"><span class="qcard-num">20</span><div class="qcard-text">"How much on Uber?"</div><span class="qcard-tag">Rideshare</span></div>
+    <div class="qcard"><span class="qcard-num">21</span><div class="qcard-text">"What did I spend at Costco?"</div><span class="qcard-tag">Costco</span></div>
+    <div class="qcard"><span class="qcard-num">22</span><div class="qcard-text">"How much did I spend last month?"</div><span class="qcard-tag">Monthly</span></div>
+    <div class="qcard"><span class="qcard-num">23</span><div class="qcard-text">"How much at McDonald's?"</div><span class="qcard-tag">Fast Food</span></div>
+    <div class="qcard"><span class="qcard-num">24</span><div class="qcard-text">"How much on DoorDash?"</div><span class="qcard-tag">Delivery</span></div>
+    <div class="qcard"><span class="qcard-num">25</span><div class="qcard-text">"What did I spend on gym membership?"</div><span class="qcard-tag">Fitness</span></div>
+    <div class="qcard"><span class="qcard-num">26</span><div class="qcard-text">"How much did I spend at Shell?"</div><span class="qcard-tag">Gas</span></div>
+    <div class="qcard"><span class="qcard-num">27</span><div class="qcard-text">"How much on Spotify?"</div><span class="qcard-tag">Music</span></div>
+    <div class="qcard"><span class="qcard-num">28</span><div class="qcard-text">"What were my transportation costs?"</div><span class="qcard-tag">Transport</span></div>
+    <div class="qcard"><span class="qcard-num">29</span><div class="qcard-text">"How much on electricity bill?"</div><span class="qcard-tag">Bills</span></div>
+    <div class="qcard"><span class="qcard-num">30</span><div class="qcard-text">"How much did I save this month?"</div><span class="qcard-tag">Savings</span></div>
   </div>
-
-  <!-- SPENDING -->
-  <div class="qtab-panel active" id="tab-spending">
-    <div class="qcard"><span class="qcard-num">01</span><div class="qcard-text">"How much did I spend this month?"</div><span class="qcard-tag supported">Total Spending · Monthly</span></div>
-    <div class="qcard"><span class="qcard-num">02</span><div class="qcard-text">"How much did I spend last month?"</div><span class="qcard-tag supported">Total Spending · Last Month</span></div>
-    <div class="qcard"><span class="qcard-num">03</span><div class="qcard-text">"What are my expenses this week?"</div><span class="qcard-tag supported">Weekly Spending</span></div>
-    <div class="qcard"><span class="qcard-num">04</span><div class="qcard-text">"How much did I spend today?"</div><span class="qcard-tag supported">Daily Spending</span></div>
-    <div class="qcard"><span class="qcard-num">05</span><div class="qcard-text">"What was my total spending this year?"</div><span class="qcard-tag supported">Annual Spending</span></div>
-    <div class="qcard"><span class="qcard-num">06</span><div class="qcard-text">"How much did I spend on groceries?"</div><span class="qcard-tag supported">Category Spending</span></div>
-    <div class="qcard"><span class="qcard-num">07</span><div class="qcard-text">"How much did I spend on food?"</div><span class="qcard-tag supported">Food Expenses</span></div>
-    <div class="qcard"><span class="qcard-num">08</span><div class="qcard-text">"What did I spend on gas this month?"</div><span class="qcard-tag supported">Fuel Spending</span></div>
-    <div class="qcard"><span class="qcard-num">09</span><div class="qcard-text">"How much did I spend on Netflix?"</div><div class="qcard-tag supported">Subscription</span></div>
-    <div class="qcard"><span class="qcard-num">10</span><div class="qcard-text">"How much did I spend on Amazon?"</div><span class="qcard-tag supported">Online Shopping</span></div>
-    <div class="qcard"><span class="qcard-num">11</span><div class="qcard-text">"What was my highest expense this month?"</div><span class="qcard-tag supported">Max Transaction</span></div>
-    <div class="qcard"><span class="qcard-num">12</span><div class="qcard-text">"How much did I spend on dining out?"</div><span class="qcard-tag supported">Restaurants</span></div>
-    <div class="qcard"><span class="qcard-num">13</span><div class="qcard-text">"What did I spend on utilities?"</div><span class="qcard-tag supported">Bills · Utilities</span></div>
-    <div class="qcard"><span class="qcard-num">14</span><div class="qcard-text">"How much did I spend on entertainment?"</div><span class="qcard-tag supported">Entertainment</span></div>
-    <div class="qcard"><span class="qcard-num">15</span><div class="qcard-text">"What were my shopping expenses?"</div><span class="qcard-tag supported">Shopping</span></div>
-    <div class="qcard"><span class="qcard-num">16</span><div class="qcard-text">"How much did I spend on travel?"</div><span class="qcard-tag supported">Travel · Vacation</span></div>
-    <div class="qcard"><span class="qcard-num">17</span><div class="qcard-text">"What did I spend on healthcare?"</div><span class="qcard-tag supported">Medical · Health</span></div>
-    <div class="qcard"><span class="qcard-num">18</span><div class="qcard-text">"How much did I spend on subscriptions?"</div><span class="qcard-tag supported">Recurring Payments</span></div>
-    <div class="qcard"><span class="qcard-num">19</span><div class="qcard-text">"What were my transportation costs?"</div><span class="qcard-tag supported">Transport · Commute</span></div>
-    <div class="qcard"><span class="qcard-num">20</span><div class="qcard-text">"How much did I spend on clothing?"</div><span class="qcard-tag supported">Apparel · Fashion</span></div>
-  </div>
-
-  <!-- INCOME -->
-  <div class="qtab-panel" id="tab-income">
-    <div class="qcard"><span class="qcard-num">21</span><div class="qcard-text">"How much did I earn this month?"</div><span class="qcard-tag supported">Monthly Income</span></div>
-    <div class="qcard"><span class="qcard-num">22</span><div class="qcard-text">"What is my total income this year?"</div><span class="qcard-tag supported">Annual Income</span></div>
-    <div class="qcard"><span class="qcard-num">23</span><div class="qcard-text">"How much did I receive as salary?"</div><span class="qcard-tag supported">Salary · Paycheck</span></div>
-    <div class="qcard"><span class="qcard-num">24</span><div class="qcard-text">"What are my total deposits?"</div><span class="qcard-tag supported">All Deposits</span></div>
-    <div class="qcard"><span class="qcard-num">25</span><div class="qcard-text">"How much did I receive as bonus?"</div><span class="qcard-tag supported">Bonus Income</span></div>
-    <div class="qcard"><span class="qcard-num">26</span><div class="qcard-text">"What is my total freelance income?"</div><span class="qcard-tag supported">Freelance · Side Gig</span></div>
-    <div class="qcard"><span class="qcard-num">27</span><div class="qcard-text">"How much did I earn from investments?"</div><span class="qcard-tag supported">Investment Returns</span></div>
-    <div class="qcard"><span class="qcard-num">28</span><div class="qcard-text">"What is my monthly salary?"</div><span class="qcard-tag supported">Salary Amount</span></div>
-    <div class="qcard"><span class="qcard-num">29</span><div class="qcard-text">"How much did I receive in refunds?"</div><span class="qcard-tag supported">Refunds</span></div>
-    <div class="qcard"><span class="qcard-num">30</span><div class="qcard-text">"What are my other income sources?"</div><span class="qcard-tag supported">Misc Income</span></div>
-  </div>
-
-  <!-- CATEGORY -->
-  <div class="qtab-panel" id="tab-category">
-    <div class="qcard"><span class="qcard-num">31</span><div class="qcard-text">"How much did I spend on groceries this week?"</div><span class="qcard-tag supported">Grocery · Weekly</span></div>
-    <div class="qcard"><span class="qcard-num">32</span><div class="qcard-text">"What is my grocery spending for this month?"</div><span class="qcard-tag supported">Grocery · Monthly</span></div>
-    <div class="qcard"><span class="qcard-num">33</span><div class="qcard-text">"How much did I spend on gas last week?"</div><span class="qcard-tag supported">Gas · Weekly</span></div>
-    <div class="qcard"><span class="qcard-num">34</span><div class="qcard-text">"What did I spend on coffee this month?"</div><span class="qcard-tag supported">Coffee · Daily</span></div>
-    <div class="qcard"><span class="qcard-num">35</span><div class="qcard-text">"How much on restaurants?"</div><span class="qcard-tag supported">Dining Out</span></div>
-    <div class="qcard"><span class="qcard-num">36</span><div class="qcard-text">"What were my fast food expenses?"</div><span class="qcard-tag supported">Fast Food</span></div>
-    <div class="qcard"><span class="qcard-num">37</span><div class="qcard-text">"How much did I spend on movies?"</div><span class="qcard-tag supported">Movies · Entertainment</span></div>
-    <div class="qcard"><span class="qcard-num">38</span><div class="qcard-text">"What did I spend on gym membership?"</div><span class="qcard-tag supported">Fitness</span></div>
-    <div class="qcard"><span class="qcard-num">39</span><div class="qcard-text">"How much on electricity bill?"</div><span class="qcard-tag supported">Electric Bill</span></div>
-    <div class="qcard"><span class="qcard-num">40</span><div class="qcard-text">"What is my water bill?"</div><span class="qcard-tag supported">Water Bill</span></div>
-    <div class="qcard"><span class="qcard-num">41</span><div class="qcard-text">"How much did I spend on internet?"</div><span class="qcard-tag supported">Internet Bill</span></div>
-    <div class="qcard"><span class="qcard-num">42</span><div class="qcard-text">"What did I spend on phone bill?"</div><span class="qcard-tag supported">Mobile Bill</span></div>
-    <div class="qcard"><span class="qcard-num">43</span><div class="qcard-text">"How much on rent?"</div><span class="qcard-tag supported">Rent</span></div>
-    <div class="qcard"><span class="qcard-num">44</span><div class="qcard-text">"What were my insurance costs?"</div><span class="qcard-tag supported">Insurance</span></div>
-    <div class="qcard"><span class="qcard-num">45</span><div class="qcard-text">"How much did I spend on medication?"</div><span class="qcard-tag supported">Pharmacy · Medicine</span></div>
-    <div class="qcard"><span class="qcard-num">46</span><div class="qcard-text">"What did I spend on pet supplies?"</div><span class="qcard-tag supported">Pets</span></div>
-    <div class="qcard"><span class="qcard-num">47</span><div class="qcard-text">"How much on home repairs?"</div><span class="qcard-tag supported">Home Maintenance</span></div>
-    <div class="qcard"><span class="qcard-num">48</span><div class="qcard-text">"What were my car expenses?"</div><span class="qcard-tag supported">Car · Vehicle</span></div>
-    <div class="qcard"><span class="qcard-num">49</span><div class="qcard-text">"How much on public transport?"</div><span class="qcard-tag supported">Transit</span></div>
-    <div class="qcard"><span class="qcard-num">50</span><div class="qcard-text">"What did I spend on parking?"</div><span class="qcard-tag supported">Parking Fees</span></div>
-  </div>
-
-  <!-- MERCHANT -->
-  <div class="qtab-panel" id="tab-merchant">
-    <div class="qcard"><span class="qcard-num">51</span><div class="qcard-text">"How much did I spend at Walmart?"</div><span class="qcard-tag supported">Walmart</span></div>
-    <div class="qcard"><span class="qcard-num">52</span><div class="qcard-text">"What did I spend at Target?"</div><span class="qcard-tag supported">Target</span></div>
-    <div class="qcard"><span class="qcard-num">53</span><div class="qcard-text">"How much at Amazon?"</div><span class="qcard-tag supported">Amazon</span></div>
-    <div class="qcard"><span class="qcard-num">54</span><div class="qcard-text">"What did I spend at Starbucks?"</div><span class="qcard-tag supported">Starbucks</span></div>
-    <div class="qcard"><span class="qcard-num">55</span><div class="qcard-text">"How much did I spend at McDonald's?"</div><span class="qcard-tag supported">McDonald's</span></div>
-    <div class="qcard"><span class="qcard-num">56</span><div class="qcard-text">"What at Uber?"</div><span class="qcard-tag supported">Uber</span></div>
-    <div class="qcard"><span class="qcard-num">57</span><div class="qcard-text">"How much on Uber Eats?"</div><span class="qcard-tag supported">Uber Eats</span></div>
-    <div class="qcard"><span class="qcard-num">58</span><div class="qcard-text">"What at DoorDash?"</div><span class="qcard-tag supported">DoorDash</span></div>
-    <div class="qcard"><span class="qcard-num">59</span><div class="qcard-text">"How much did I spend at Shell?"</div><span class="qcard-tag supported">Shell Gas</span></div>
-    <div class="qcard"><span class="qcard-num">60</span><div class="qcard-text">"What at Costco?"</div><span class="qcard-tag supported">Costco</span></div>
-    <div class="qcard"><span class="qcard-num">61</span><div class="qcard-text">"How much at Best Buy?"</div><span class="qcard-tag supported">Best Buy</span></div>
-    <div class="qcard"><span class="qcard-num">62</span><div class="qcard-text">"What did I spend at Apple Store?"</div><span class="qcard-tag supported">Apple</span></div>
-    <div class="qcard"><span class="qcard-num">63</span><div class="qcard-text">"How much on Spotify?"</div><span class="qcard-tag supported">Spotify</span></div>
-    <div class="qcard"><span class="qcard-num">64</span><div class="qcard-text">"What at Netflix?"</div><span class="qcard-tag supported">Netflix</span></div>
-    <div class="qcard"><span class="qcard-num">65</span><div class="qcard-text">"How much did I spend on YouTube?"</div><span class="qcard-tag supported">YouTube Premium</span></div>
-  </div>
-
-  <!-- DATE-BASED -->
-  <div class="qtab-panel" id="tab-date">
-    <div class="qcard"><span class="qcard-num">66</span><div class="qcard-text">"How much did I spend last week?"</div><span class="qcard-tag supported">Last Week</span></div>
-    <div class="qcard"><span class="qcard-num">67</span><div class="qcard-text">"What was my spending this quarter?"</div><span class="qcard-tag supported">Quarterly</span></div>
-    <div class="qcard"><span class="qcard-num">68</span><div class="qcard-text">"How much in the last 7 days?"</div><span class="qcard-tag supported">Last 7 Days</span></div>
-    <div class="qcard"><span class="qcard-num">69</span><div class="qcard-text">"What did I spend on my birthday?"</div><span class="qcard-tag supported">Specific Date</span></div>
-    <div class="qcard"><span class="qcard-num">70</span><div class="qcard-text">"How much during the weekend?"</div><span class="qcard-tag supported">Weekend Spending</span></div>
-    <div class="qcard"><span class="qcard-num">71</span><div class="qcard-text">"What were my expenses on January?"</div><span class="qcard-tag supported">Month Filter</span></div>
-    <div class="qcard"><span class="qcard-num">72</span><div class="qcard-text">"How much did I spend in December?"</div><span class="qcard-tag supported">Holiday Spending</span></div>
-    <div class="qcard"><span class="qcard-num">73</span><div class="qcard-text">"What was my spending during vacation?"</div><span class="qcard-tag supported">Vacation Expenses</span></div>
-    <div class="qcard"><span class="qcard-num">74</span><div class="qcard-text">"How much did I spend last year?"</div><span class="qcard-tag supported">Annual Last Year</span></div>
-    <div class="qcard"><span class="qcard-num">75</span><div class="qcard-text">"What this past Sunday?"</div><span class="qcard-tag supported">Day Specific</span></div>
-    <div class="qcard"><span class="qcard-num">76</span><div class="qcard-text">"How much in the last 30 days?"</div><span class="qcard-tag supported">Last 30 Days</span></div>
-    <div class="qcard"><span class="qcard-num">77</span><div class="qcard-text">"What was my spending on payday?"</div><span class="qcard-tag supported">Payday Analysis</span></div>
-    <div class="qcard"><span class="qcard-num">78</span><div class="qcard-text">"How much since I got paid?"</div><span class="qcard-tag supported">Post-Payday</span></div>
-    <div class="qcard"><span class="qcard-num">79</span><div class="qcard-text">"What did I spend in summer?"</div><span class="qcard-tag supported">Seasonal</span></div>
-    <div class="qcard"><span class="qcard-num">80</span><div class="qcard-text">"How much last Christmas?"</div><span class="qcard-tag supported">Holiday</span></div>
-  </div>
-
-  <!-- BUDGET -->
-  <div class="qtab-panel" id="tab-budget">
-    <div class="qcard"><span class="qcard-num">81</span><div class="qcard-text">"How much did I save this month?"</div><span class="qcard-tag supported">Monthly Savings</span></div>
-    <div class="qcard"><span class="qcard-num">82</span><div class="qcard-text">"What is my savings rate?"</div><span class="qcard-tag supported">Savings Ratio</span></div>
-    <div class="qcard"><span class="qcard-num">83</span><div class="qcard-text">"How much under budget am I?"</div><span class="qcard-tag supported">Budget Status</span></div>
-    <div class="qcard"><span class="qcard-num">84</span><div class="qcard-text">"Did I overspend this month?"</div><span class="qcard-tag supported">Over Budget</span></div>
-    <div class="qcard"><span class="qcard-num">85</span><div class="qcard-text">"What is my average monthly spending?"</div><span class="qcard-tag supported">Average Spending</span></div>
-    <div class="qcard"><span class="qcard-num">86</span><div class="qcard-text">"How much do I spend on essentials?"</div><span class="qcard-tag supported">Essentials vs Non-Essentials</span></div>
-    <div class="qcard"><span class="qcard-num">87</span><div class="qcard-text">"What percentage goes to discretionary?"</div><span class="qcard-tag supported">Discretionary Spending</span></div>
-    <div class="qcard"><span class="qcard-num">88</span><div class="qcard-text">"How much did I spend on wants vs needs?"</div><span class="qcard-tag supported">Wants vs Needs</span></div>
-    <div class="qcard"><span class="qcard-num">89</span><div class="qcard-text">"What is my biggest expense category?"</div><span class="qcard-tag supported">Top Category</span></div>
-    <div class="qcard"><span class="qcard-num">90</span><div class="qcard-text">"How much more did I spend this month?"</div><span class="qcard-tag supported">Month over Month</span></div>
-    <div class="qcard"><span class="qcard-num">91</span><div class="qcard-text">"What is my daily average spending?"</div><span class="qcard-tag supported">Daily Average</span></div>
-    <div class="qcard"><span class="qcard-num">92</span><div class="qcard-text">"How much did I spend on impulse buys?"</div><span class="qcard-tag partial">Impulse Purchases</span></div>
-    <div class="qcard"><span class="qcard-num">93</span><div class="qcard-text">"What was my spending trend?"</div><span class="qcard-tag supported">Trend Analysis</span></div>
-    <div class="qcard"><span class="qcard-num">94</span><div class="qcard-text">"How much should I save next month?"</div><span class="qcard-tag partial">Savings Recommendation</span></div>
-    <div class="qcard"><span class="qcard-num">95</span><div class="qcard-text">"What is my net worth?"</div><span class="qcard-tag partial">Net Worth Calculation</span></div>
-    <div class="qcard"><span class="qcard-num">96</span><div class="qcard-text">"How much debt do I have?"</div><span class="qcard-tag partial">Debt Tracking</span></div>
-    <div class="qcard"><span class="qcard-num">97</span><div class="qcard-text">"What are my recurring expenses?"</div><span class="qcard-tag supported">Recurring Payments</span></div>
-    <div class="qcard"><span class="qcard-num">98</span><div class="qcard-text">"How much on subscriptions I forgot about?"</div><span class="qcard-tag supported">Forgotten Subscriptions</span></div>
-    <div class="qcard"><span class="qcard-num">99</span><div class="qcard-text">"What is my financial health score?"</div><span class="qcard-tag partial">Financial Health</span></div>
-    <div class="qcard"><span class="qcard-num">100</span><div class="qcard-text">"Give me a spending breakdown by category"</div><span class="qcard-tag supported">Category Breakdown</span></div>
-  </div>
-
-  <div style="margin-top:2rem; display:flex; gap:1.5rem; align-items:center; font-size:0.72rem; color:var(--muted)">
-    <span><span style="display:inline-block;width:8px;height:8px;background:rgba(45,106,79,0.5);border-radius:50%;margin-right:0.4rem;vertical-align:middle"></span>Supported in v1.0</span>
-    <span><span style="display:inline-block;width:8px;height:8px;background:rgba(176,138,62,0.5);border-radius:50%;margin-right:0.4rem;vertical-align:middle"></span>Partial — on roadmap</span>
-  </div>
-
-  <script>
-    function switchTab(el, key) {
-      document.querySelectorAll('.qtab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.qtab-panel').forEach(p => p.classList.remove('active'));
-      el.classList.add('active');
-      document.getElementById('tab-' + key).classList.add('active');
-    }
-  </script>
 </section>
 
 <!-- SCHEMA -->
