@@ -724,7 +724,7 @@ Response:
 <section id="queries" style="padding:7rem 4rem">
   <div class="section-eyebrow">Query Intelligence</div>
   <h2>100 questions SAI<br><em>understands</em></h2>
-  <p class="lead" style="margin-bottom:3rem">From simple balance checks to complex trend analysis — SAI parses natural language across six intent categories and maps each query to the right search, filter, and aggregation strategy.</p>
+  <p class="lead" style="margin-bottom:3rem">From simple web searches to complex research queries — SAI processes natural language across multiple intent categories and delivers precise, relevant results powered by advanced AI.</p>
 
   <style>
     .qtab-bar {
@@ -766,135 +766,135 @@ Response:
 
   <div class="qtab-bar">
     <div class="qtab active" onclick="switchTab(this,'basic')">Basic <span class="qtab-count">10</span></div>
-    <div class="qtab" onclick="switchTab(this,'transaction')">Transaction-Specific <span class="qtab-count">10</span></div>
-    <div class="qtab" onclick="switchTab(this,'date')">Date-Based <span class="qtab-count">10</span></div>
-    <div class="qtab" onclick="switchTab(this,'category')">Category-Based <span class="qtab-count">10</span></div>
-    <div class="qtab" onclick="switchTab(this,'trend')">Trends &amp; Comparison <span class="qtab-count">10</span></div>
-    <div class="qtab" onclick="switchTab(this,'advanced')">Advanced &amp; Complex <span class="qtab-count">50</span></div>
+    <div class="qtab" onclick="switchTab(this,'research')">Research <span class="qtab-count">10</span></div>
+    <div class="qtab" onclick="switchTab(this,'news')">News &amp; Trends <span class="qtab-count">10</span></div>
+    <div class="qtab" onclick="switchTab(this,'technical')">Technical <span class="qtab-count">10</span></div>
+    <div class="qtab" onclick="switchTab(this,'creative')">Creative <span class="qtab-count">10</span></div>
+    <div class="qtab" onclick="switchTab(this,'advanced')">Advanced <span class="qtab-count">50</span></div>
   </div>
 
   <!-- BASIC -->
   <div class="qtab-panel active" id="tab-basic">
-    <div class="qcard"><span class="qcard-num">01</span><div class="qcard-text">"What is my current account balance?"</div><span class="qcard-tag supported">Balance Lookup</span></div>
-    <div class="qcard"><span class="qcard-num">02</span><div class="qcard-text">"How much did I spend last month?"</div><span class="qcard-tag supported">Date Filter · Aggregation</span></div>
-    <div class="qcard"><span class="qcard-num">03</span><div class="qcard-text">"What are my last five transactions?"</div><span class="qcard-tag supported">Limit · Recency Sort</span></div>
-    <div class="qcard"><span class="qcard-num">04</span><div class="qcard-text">"How much did I deposit this week?"</div><span class="qcard-tag supported">Date Filter · Type Filter</span></div>
-    <div class="qcard"><span class="qcard-num">05</span><div class="qcard-text">"How much did I withdraw in the last 7 days?"</div><span class="qcard-tag supported">Last N Days · Debit Filter</span></div>
-    <div class="qcard"><span class="qcard-num">06</span><div class="qcard-text">"What was my highest transaction this month?"</div><span class="qcard-tag supported">Max Aggregation · Month Filter</span></div>
-    <div class="qcard"><span class="qcard-num">07</span><div class="qcard-text">"What was my lowest transaction this month?"</div><span class="qcard-tag supported">Min Aggregation · Month Filter</span></div>
-    <div class="qcard"><span class="qcard-num">08</span><div class="qcard-text">"How many times did I use my debit card this month?"</div><span class="qcard-tag supported">Count · Card Type Filter</span></div>
-    <div class="qcard"><span class="qcard-num">09</span><div class="qcard-text">"How many times did I use my credit card this month?"</div><span class="qcard-tag supported">Count · Card Type Filter</span></div>
-    <div class="qcard"><span class="qcard-num">10</span><div class="qcard-text">"Did I receive my paycheck deposit?"</div><span class="qcard-tag supported">Semantic Search · Credit Match</span></div>
+    <div class="qcard"><span class="qcard-num">01</span><div class="qcard-text">"What is machine learning?"</div><span class="qcard-tag supported">Definition · Quick Answer</span></div>
+    <div class="qcard"><span class="qcard-num">02</span><div class="qcard-text">"Who founded Google?"</div><span class="qcard-tag supported">Fact Retrieval</span></div>
+    <div class="qcard"><span class="qcard-num">03</span><div class="qcard-text">"What's the capital of Japan?"</div><span class="qcard-tag supported">Geographic Fact</span></div>
+    <div class="qcard"><span class="qcard-num">04</span><div class="qcard-text">"How do I make pancakes?"</div><span class="qcard-tag supported">Recipe Search</span></div>
+    <div class="qcard"><span class="qcard-num">05</span><div class="qcard-text">"What time is it in London?"</div><span class="qcard-tag supported">Time Zone</span></div>
+    <div class="qcard"><span class="qcard-num">06</span><div class="qcard-text">"Convert 100 USD to EUR"</div><span class="qcard-tag supported">Currency Conversion</span></div>
+    <div class="qcard"><span class="qcard-num">07</span><div class="qcard-text">"Define artificial intelligence"</div><span class="qcard-tag supported">Definition</span></div>
+    <div class="qcard"><span class="qcard-num">08</span><div class="qcard-text">"What's the weather like today?"</div><span class="qcard-tag supported">Weather · Location</span></div>
+    <div class="qcard"><span class="qcard-num">09</span><div class="qcard-text">"How far is the moon?"</div><span class="qcard-tag supported">Scientific Fact</span></div>
+    <div class="qcard"><span class="qcard-num">10</span><div class="qcard-text">"What year did WW2 end?"</div><span class="qcard-tag supported">Historical Date</span></div>
   </div>
 
-  <!-- TRANSACTION SPECIFIC -->
-  <div class="qtab-panel" id="tab-transaction">
-    <div class="qcard"><span class="qcard-num">11</span><div class="qcard-text">"How much did I spend at Amazon last month?"</div><span class="qcard-tag supported">Merchant Filter · Date Range</span></div>
-    <div class="qcard"><span class="qcard-num">12</span><div class="qcard-text">"What was my last transaction at Walmart?"</div><span class="qcard-tag supported">Merchant Search · Recency Sort</span></div>
-    <div class="qcard"><span class="qcard-num">13</span><div class="qcard-text">"Can you show all transactions from Starbucks?"</div><span class="qcard-tag supported">Merchant Filter · Full History</span></div>
-    <div class="qcard"><span class="qcard-num">14</span><div class="qcard-text">"Did I get charged twice for my last Uber ride?"</div><span class="qcard-tag supported">Duplicate Detection · Merchant</span></div>
-    <div class="qcard"><span class="qcard-num">15</span><div class="qcard-text">"When was my last refund from PayPal?"</div><span class="qcard-tag supported">Refund Filter · Merchant</span></div>
-    <div class="qcard"><span class="qcard-num">16</span><div class="qcard-text">"What is the largest amount I spent in a single transaction?"</div><span class="qcard-tag supported">Max Amount · Global</span></div>
-    <div class="qcard"><span class="qcard-num">17</span><div class="qcard-text">"What was my last online purchase?"</div><span class="qcard-tag supported">Semantic Search · Recency</span></div>
-    <div class="qcard"><span class="qcard-num">18</span><div class="qcard-text">"How much did I spend on food last week?"</div><span class="qcard-tag supported">Category · Last Week</span></div>
-    <div class="qcard"><span class="qcard-num">19</span><div class="qcard-text">"Did I get charged for Netflix this month?"</div><span class="qcard-tag supported">Merchant · Month Filter</span></div>
-    <div class="qcard"><span class="qcard-num">20</span><div class="qcard-text">"Show me all my ATM withdrawals this month?"</div><span class="qcard-tag supported">Type Filter · Month</span></div>
+  <!-- RESEARCH -->
+  <div class="qtab-panel" id="tab-research">
+    <div class="qcard"><span class="qcard-num">11</span><div class="qcard-text">"What are the benefits of meditation?"</div><span class="qcard-tag supported">Health Research</span></div>
+    <div class="qcard"><span class="qcard-num">12</span><div class="qcard-text">"Compare Python vs JavaScript for web development"</div><span class="qcard-tag supported">Comparison · Technical</span></div>
+    <div class="qcard"><span class="qcard-num">13</span><div class="qcard-text">"What causes climate change?"</div><span class="qcard-tag supported">Scientific Explanation</span></div>
+    <div class="qcard"><span class="qcard-num">14</span><div class="qcard-text">"History of artificial intelligence"</div><span class="qcard-tag supported">Topic History</span></div>
+    <div class="qcard"><span class="qcard-num">15</span><div class="qcard-text">"Best practices for remote work"</div><span class="qcard-tag supported">Recommendations</span></div>
+    <div class="qcard"><span class="qcard-num">16</span><div class="qcard-text">"What is quantum computing?"</div><span class="qcard-tag supported">Technical Concept</span></div>
+    <div class="qcard"><span class="qcard-num">17</span><div class="qcard-text">"How does blockchain work?"</div><span class="qcard-tag supported">Technical Explanation</span></div>
+    <div class="qcard"><span class="qcard-num">18</span><div class="qcard-text">"What are the top programming languages in 2024?"</div><span class="qcard-tag supported">Trends · Tech</span></div>
+    <div class="qcard"><span class="qcard-num">19</span><div class="qcard-text">"Explain neural networks simply"</div><span class="qcard-tag supported">Simplified Concept</span></div>
+    <div class="qcard"><span class="qcard-num">20</span><div class="qcard-text">"What is the future of AI?"</div><span class="qcard-tag supported">Future Trends</span></div>
   </div>
 
-  <!-- DATE BASED -->
-  <div class="qtab-panel" id="tab-date">
-    <div class="qcard"><span class="qcard-num">21</span><div class="qcard-text">"What were my transactions on January 10th?"</div><span class="qcard-tag supported">Exact Date · Day Filter</span></div>
-    <div class="qcard"><span class="qcard-num">22</span><div class="qcard-text">"Show me all my transactions for the last six months."</div><span class="qcard-tag supported">Rolling 6-Month Window</span></div>
-    <div class="qcard"><span class="qcard-num">23</span><div class="qcard-text">"How much did I spend during the holiday season?"</div><span class="qcard-tag supported">Semantic · Dec Date Range</span></div>
-    <div class="qcard"><span class="qcard-num">24</span><div class="qcard-text">"What was my balance at the beginning of this year?"</div><span class="qcard-tag supported">Point-in-Time Balance</span></div>
-    <div class="qcard"><span class="qcard-num">25</span><div class="qcard-text">"What are my transactions for the last three days?"</div><span class="qcard-tag supported">Last N Days Filter</span></div>
-    <div class="qcard"><span class="qcard-num">26</span><div class="qcard-text">"How much did I spend in Q1 of this year?"</div><span class="qcard-tag supported">Quarter Filter · Year</span></div>
-    <div class="qcard"><span class="qcard-num">27</span><div class="qcard-text">"Show me all transactions from the last weekend."</div><span class="qcard-tag supported">Weekend Date Calc</span></div>
-    <div class="qcard"><span class="qcard-num">28</span><div class="qcard-text">"What were my expenses on my birthday?"</div><span class="qcard-tag partial">Specific Date · User Profile</span></div>
-    <div class="qcard"><span class="qcard-num">29</span><div class="qcard-text">"How many transactions did I make in December?"</div><span class="qcard-tag supported">Month · Count Aggregation</span></div>
-    <div class="qcard"><span class="qcard-num">30</span><div class="qcard-text">"Show me my total deposits for the last six months."</div><span class="qcard-tag supported">Credit · Rolling 6-Month</span></div>
+  <!-- NEWS & TRENDS -->
+  <div class="qtab-panel" id="tab-news">
+    <div class="qcard"><span class="qcard-num">21</span><div class="qcard-text">"Latest news about space exploration"</div><span class="qcard-tag supported">News Search</span></div>
+    <div class="qcard"><span class="qcard-num">22</span><div class="qcard-text">"What is ChatGPT and how does it work?"</div><span class="qcard-tag supported">Tech Explained</span></div>
+    <div class="qcard"><span class="qcard-num">23</span><div class="qcard-text">"Recent breakthroughs in renewable energy"</div><span class="qcard-tag supported">Innovation News</span></div>
+    <div class="qcard"><span class="qcard-num">24</span><div class="qcard-text">"What's happening with electric vehicles?"</div><span class="qcard-tag supported">Industry Trends</span></div>
+    <div class="qcard"><span class="qcard-num">25</span><div class="qcard-text">"Latest developments in healthcare AI"</div><span class="qcard-tag supported">Health Tech</span></div>
+    <div class="qcard"><span class="qcard-num">26</span><div class="qcard-text">"What is Web3?"</div><span class="qcard-tag supported">Tech Concept</span></div>
+    <div class="qcard"><span class="qcard-num">27</span><div class="qcard-text">"Trends in cybersecurity for 2024"</div><span class="qcard-tag supported">Security Trends</span></div>
+    <div class="qcard"><span class="qcard-num">28</span><div class="qcard-text">"What's new in smartphone technology?"</div><span class="qcard-tag supported">Tech News</span></div>
+    <div class="qcard"><span class="qcard-num">29</span><div class="qcard-text">"Advances in medical research"</div><span class="qcard-tag supported">Science News</span></div>
+    <div class="qcard"><span class="qcard-num">30</span><div class="qcard-text">"What is the metaverse?"</div><span class="qcard-tag supported">Tech Definition</span></div>
   </div>
 
-  <!-- CATEGORY BASED -->
-  <div class="qtab-panel" id="tab-category">
-    <div class="qcard"><span class="qcard-num">31</span><div class="qcard-text">"How much did I spend on groceries this month?"</div><span class="qcard-tag supported">Category · Month Aggregate</span></div>
-    <div class="qcard"><span class="qcard-num">32</span><div class="qcard-text">"Show me all my entertainment expenses for the last three months."</div><span class="qcard-tag supported">Category · 3-Month Window</span></div>
-    <div class="qcard"><span class="qcard-num">33</span><div class="qcard-text">"How much have I spent on travel this year?"</div><span class="qcard-tag supported">Category · YTD Sum</span></div>
-    <div class="qcard"><span class="qcard-num">34</span><div class="qcard-text">"What is my biggest expense category this month?"</div><span class="qcard-tag supported">Category Ranking · Max</span></div>
-    <div class="qcard"><span class="qcard-num">35</span><div class="qcard-text">"How much did I spend on subscriptions in the last year?"</div><span class="qcard-tag supported">Recurring · Annual Sum</span></div>
-    <div class="qcard"><span class="qcard-num">36</span><div class="qcard-text">"How much do I spend on fuel every month?"</div><span class="qcard-tag supported">Gas Category · Monthly Avg</span></div>
-    <div class="qcard"><span class="qcard-num">37</span><div class="qcard-text">"Show me all my medical expenses from last year."</div><span class="qcard-tag supported">Category · Annual Filter</span></div>
-    <div class="qcard"><span class="qcard-num">38</span><div class="qcard-text">"How much did I spend on rent this year?"</div><span class="qcard-tag supported">Utilities Category · YTD</span></div>
-    <div class="qcard"><span class="qcard-num">39</span><div class="qcard-text">"What is my average grocery bill per month?"</div><span class="qcard-tag supported">Category · Monthly Average</span></div>
-    <div class="qcard"><span class="qcard-num">40</span><div class="qcard-text">"How much did I spend on shopping last Black Friday?"</div><span class="qcard-tag supported">Shopping · Specific Date</span></div>
+  <!-- TECHNICAL -->
+  <div class="qtab-panel" id="tab-technical">
+    <div class="qcard"><span class="qcard-num">31</span><div class="qcard-text">"How to learn Python programming"</div><span class="qcard-tag supported">Learning Path</span></div>
+    <div class="qcard"><span class="qcard-num">32</span><div class="qcard-text">"What is an API?"</div><span class="qcard-tag supported">Technical Definition</span></div>
+    <div class="qcard"><span class="qcard-num">33</span><div class="qcard-text">"Explain cloud computing to a beginner"</div><span class="qcard-tag supported">Simplified Tech</span></div>
+    <div class="qcard"><span class="qcard-num">34</span><div class="qcard-text">"What is Docker and why use it?"</div><span class="qcard-tag supported">DevOps Concept</span></div>
+    <div class="qcard"><span class="qcard-num">35</span><div class="qcard-text">"How does HTTP work?"</div><span class="qcard-tag supported">Protocol Explanation</span></div>
+    <div class="qcard"><span class="qcard-num">36</span><div class="qcard-text">"What is Git and how do I use it?"</div><span class="qcard-tag supported">Version Control</span></div>
+    <div class="qcard"><span class="qcard-num">37</span><div class="qcard-text">"Difference between SQL and NoSQL"</div><span class="qcard-tag supported">Database Comparison</span></div>
+    <div class="qcard"><span class="qcard-num">38</span><div class="qcard-text">"What is machine learning algorithms?"</div><span class="qcard-tag supported">ML Concepts</span></div>
+    <div class="qcard"><span class="qcard-num">39</span><div class="qcard-text">"How to set up a local server"</div><span class="qcard-tag supported">Technical Guide</span></div>
+    <div class="qcard"><span class="qcard-num">40</span><div class="qcard-text">"What is Kubernetes?"</div><span class="qcard-tag supported">Container Orchestration</span></div>
   </div>
 
-  <!-- TRENDS -->
-  <div class="qtab-panel" id="tab-trend">
-    <div class="qcard"><span class="qcard-num">41</span><div class="qcard-text">"Did I spend more on food this month than last month?"</div><span class="qcard-tag supported">MoM Comparison · Category</span></div>
-    <div class="qcard"><span class="qcard-num">42</span><div class="qcard-text">"Compare my total spending for the last three months."</div><span class="qcard-tag supported">Multi-Month Aggregation</span></div>
-    <div class="qcard"><span class="qcard-num">43</span><div class="qcard-text">"What is my average monthly spending?"</div><span class="qcard-tag supported">Rolling Average · All Time</span></div>
-    <div class="qcard"><span class="qcard-num">44</span><div class="qcard-text">"Did I save more money this year than last year?"</div><span class="qcard-tag supported">YoY Savings Comparison</span></div>
-    <div class="qcard"><span class="qcard-num">45</span><div class="qcard-text">"Has my spending on dining increased over time?"</div><span class="qcard-tag supported">Trend Analysis · Category</span></div>
-    <div class="qcard"><span class="qcard-num">46</span><div class="qcard-text">"What is my highest-spending category in the last six months?"</div><span class="qcard-tag supported">Category Rank · 6-Month</span></div>
-    <div class="qcard"><span class="qcard-num">47</span><div class="qcard-text">"How much more did I spend on travel this year vs. last year?"</div><span class="qcard-tag supported">YoY Delta · Category</span></div>
-    <div class="qcard"><span class="qcard-num">48</span><div class="qcard-text">"How do my expenses in Q1 compare to Q2?"</div><span class="qcard-tag supported">Quarter-over-Quarter</span></div>
-    <div class="qcard"><span class="qcard-num">49</span><div class="qcard-text">"Did I earn more in the last quarter than the previous one?"</div><span class="qcard-tag supported">QoQ Income Comparison</span></div>
-    <div class="qcard"><span class="qcard-num">50</span><div class="qcard-text">"What's the trend of my monthly savings?"</div><span class="qcard-tag supported">Time Series · Savings</span></div>
+  <!-- CREATIVE -->
+  <div class="qtab-panel" id="tab-creative">
+    <div class="qcard"><span class="qcard-num">41</span><div class="qcard-text">"Write a poem about technology"</div><span class="qcard-tag supported">Creative Writing</span></div>
+    <div class="qcard"><span class="qcard-num">42</span><div class="qcard-text">"Give me ideas for a mobile app"</div><span class="qcard-tag supported">Brainstorming</span></div>
+    <div class="qcard"><span class="qcard-num">43</span><div class="qcard-text">"How to start a podcast"</div><span class="qcard-tag supported">Guide · Content</span></div>
+    <div class="qcard"><span class="qcard-num">44</span><div class="qcard-text">"Best marketing strategies for startups"</div><span class="qcard-tag supported">Business Advice</span></div>
+    <div class="qcard"><span class="qcard-num">45</span><div class="qcard-text">"Design principles for websites"</div><span class="qcard-tag supported">Design Tips</span></div>
+    <div class="qcard"><span class="qcard-num">46</span><div class="qcard-text">"How to write compelling headlines"</div><span class="qcard-tag supported">Copywriting</span></div>
+    <div class="qcard"><span class="qcard-num">47</span><div class="qcard-text">"Tips for better productivity"</div><span class="qcard-tag supported">Self Improvement</span></div>
+    <div class="qcard"><span class="qcard-num">48</span><div class="qcard-text">"How to build a personal brand"</div><span class="qcard-tag supported">Career Advice</span></div>
+    <div class="qcard"><span class="qcard-num">49</span><div class="qcard-text">"Ideas for passive income"</div><span class="qcard-tag supported">Financial Planning</span></div>
+    <div class="qcard"><span class="qcard-num">50</span><div class="qcard-text">"How to learn a new skill fast"</div><span class="qcard-tag supported">Learning Tips</span></div>
   </div>
 
   <!-- ADVANCED -->
   <div class="qtab-panel" id="tab-advanced">
-    <div class="qcard"><span class="qcard-num">51</span><div class="qcard-text">"Find all transactions above $500 from the last year."</div><span class="qcard-tag supported">Amount Threshold · Date</span></div>
-    <div class="qcard"><span class="qcard-num">52</span><div class="qcard-text">"Which months did I spend more than $5,000?"</div><span class="qcard-tag supported">Monthly Sum · Threshold</span></div>
-    <div class="qcard"><span class="qcard-num">53</span><div class="qcard-text">"Identify any duplicate transactions in my statement."</div><span class="qcard-tag supported">Duplicate Detection</span></div>
-    <div class="qcard"><span class="qcard-num">54</span><div class="qcard-text">"What was my lowest balance in the last six months?"</div><span class="qcard-tag supported">Min Balance · Rolling</span></div>
-    <div class="qcard"><span class="qcard-num">55</span><div class="qcard-text">"List all transactions where I was charged a fee."</div><span class="qcard-tag supported">Fee Detection · Semantic</span></div>
-    <div class="qcard"><span class="qcard-num">56</span><div class="qcard-text">"Total amount spent using credit card last year."</div><span class="qcard-tag supported">Card Type · Annual Sum</span></div>
-    <div class="qcard"><span class="qcard-num">57</span><div class="qcard-text">"Show me all international transactions in my statement."</div><span class="qcard-tag supported">Geo Filter · Semantic</span></div>
-    <div class="qcard"><span class="qcard-num">58</span><div class="qcard-text">"How much was my total cashback last year?"</div><span class="qcard-tag supported">Cashback Filter · Annual</span></div>
-    <div class="qcard"><span class="qcard-num">59</span><div class="qcard-text">"What is my average spend per transaction?"</div><span class="qcard-tag supported">Mean · All Transactions</span></div>
-    <div class="qcard"><span class="qcard-num">60</span><div class="qcard-text">"List transactions where merchant name contains 'Gym'."</div><span class="qcard-tag supported">Merchant Substring Match</span></div>
-    <div class="qcard"><span class="qcard-num">61</span><div class="qcard-text">"Show all transactions from locations outside my city."</div><span class="qcard-tag partial">Geo Enrichment · Flag</span></div>
-    <div class="qcard"><span class="qcard-num">62</span><div class="qcard-text">"Were there any transactions from a new device?"</div><span class="qcard-tag partial">Device Metadata · Security</span></div>
-    <div class="qcard"><span class="qcard-num">63</span><div class="qcard-text">"Did I make any purchases late at night?"</div><span class="qcard-tag supported">Time-of-Day Filter</span></div>
-    <div class="qcard"><span class="qcard-num">64</span><div class="qcard-text">"Were there any failed transactions on my card?"</div><span class="qcard-tag supported">Status Filter · Failed</span></div>
-    <div class="qcard"><span class="qcard-num">65</span><div class="qcard-text">"Show me all transactions flagged as unusual."</div><span class="qcard-tag supported">Anomaly Flag Filter</span></div>
-    <div class="qcard"><span class="qcard-num">66</span><div class="qcard-text">"Did I ever get charged by an unknown merchant?"</div><span class="qcard-tag supported">Merchant Anomaly · Semantic</span></div>
-    <div class="qcard"><span class="qcard-num">67</span><div class="qcard-text">"Are there unexpected recurring charges in my statement?"</div><span class="qcard-tag supported">Recurring Detection</span></div>
-    <div class="qcard"><span class="qcard-num">68</span><div class="qcard-text">"Show me transactions from a new country."</div><span class="qcard-tag partial">Country Metadata · New</span></div>
-    <div class="qcard"><span class="qcard-num">69</span><div class="qcard-text">"Are there any unauthorized charges on my account?"</div><span class="qcard-tag supported">Fraud Detection · Semantic</span></div>
-    <div class="qcard"><span class="qcard-num">70</span><div class="qcard-text">"Were there any refunds I did not request?"</div><span class="qcard-tag supported">Refund Anomaly · Semantic</span></div>
-    <div class="qcard"><span class="qcard-num">71</span><div class="qcard-text">"What is my total outstanding credit card balance?"</div><span class="qcard-tag supported">Credit Card · Balance</span></div>
-    <div class="qcard"><span class="qcard-num">72</span><div class="qcard-text">"How much interest did I pay on my credit card last year?"</div><span class="qcard-tag supported">Interest Filter · Annual</span></div>
-    <div class="qcard"><span class="qcard-num">73</span><div class="qcard-text">"What is my average credit card bill per month?"</div><span class="qcard-tag supported">Monthly Average · Card</span></div>
-    <div class="qcard"><span class="qcard-num">74</span><div class="qcard-text">"How much of my credit limit have I used?"</div><span class="qcard-tag supported">Utilisation Ratio</span></div>
-    <div class="qcard"><span class="qcard-num">75</span><div class="qcard-text">"How much did I pay in credit card fees last year?"</div><span class="qcard-tag supported">Fee Filter · Annual</span></div>
-    <div class="qcard"><span class="qcard-num">76</span><div class="qcard-text">"When is my next credit card payment due?"</div><span class="qcard-tag partial">Billing Cycle · Predictive</span></div>
-    <div class="qcard"><span class="qcard-num">77</span><div class="qcard-text">"Show me all late payments in my statement."</div><span class="qcard-tag supported">Late Payment Filter</span></div>
-    <div class="qcard"><span class="qcard-num">78</span><div class="qcard-text">"How much have I spent on my credit card this year?"</div><span class="qcard-tag supported">Card Type · YTD Sum</span></div>
-    <div class="qcard"><span class="qcard-num">79</span><div class="qcard-text">"What was my largest credit card bill?"</div><span class="qcard-tag supported">Max Bill · All Time</span></div>
-    <div class="qcard"><span class="qcard-num">80</span><div class="qcard-text">"Show me my past due transactions."</div><span class="qcard-tag supported">Status Filter · Overdue</span></div>
-    <div class="qcard"><span class="qcard-num">81</span><div class="qcard-text">"How much did I save last month?"</div><span class="qcard-tag supported">Income minus Spend · Month</span></div>
-    <div class="qcard"><span class="qcard-num">82</span><div class="qcard-text">"What percentage of my income do I spend each month?"</div><span class="qcard-tag supported">Spend Ratio · Monthly</span></div>
-    <div class="qcard"><span class="qcard-num">83</span><div class="qcard-text">"How much should I save to meet my financial goals?"</div><span class="qcard-tag partial">Goal Calc · User Input</span></div>
-    <div class="qcard"><span class="qcard-num">84</span><div class="qcard-text">"Did I overspend my budget this month?"</div><span class="qcard-tag partial">Budget Comparison · Month</span></div>
-    <div class="qcard"><span class="qcard-num">85</span><div class="qcard-text">"How much do I have left in my budget?"</div><span class="qcard-tag partial">Remaining Budget Calc</span></div>
-    <div class="qcard"><span class="qcard-num">86</span><div class="qcard-text">"What is my average monthly savings?"</div><span class="qcard-tag supported">Rolling Savings Average</span></div>
-    <div class="qcard"><span class="qcard-num">87</span><div class="qcard-text">"How much did I save in the last five years?"</div><span class="qcard-tag supported">5-Year Savings Sum</span></div>
-    <div class="qcard"><span class="qcard-num">88</span><div class="qcard-text">"How much did I spend compared to my income?"</div><span class="qcard-tag supported">Spend vs Income Ratio</span></div>
-    <div class="qcard"><span class="qcard-num">89</span><div class="qcard-text">"What is my highest saving month?"</div><span class="qcard-tag supported">Max Savings · Monthly</span></div>
-    <div class="qcard"><span class="qcard-num">90</span><div class="qcard-text">"How much do I need to save to reach $10,000?"</div><span class="qcard-tag partial">Goal Gap Calculation</span></div>
-    <div class="qcard"><span class="qcard-num">91</span><div class="qcard-text">"Predict my spending for the next three months."</div><span class="qcard-tag partial">Predictive · ML Required</span></div>
-    <div class="qcard"><span class="qcard-num">92</span><div class="qcard-text">"Based on my habits, when will I reach my savings goal?"</div><span class="qcard-tag partial">Forecast · Goal Timeline</span></div>
-    <div class="qcard"><span class="qcard-num">93</span><div class="qcard-text">"Identify patterns in my spending behavior."</div><span class="qcard-tag supported">Pattern Mining · Semantic</span></div>
-    <div class="qcard"><span class="qcard-num">94</span><div class="qcard-text">"What percentage of my expenses are non-essential?"</div><span class="qcard-tag supported">Category Classification</span></div>
-    <div class="qcard"><span class="qcard-num">95</span><div class="qcard-text">"Recommend cost-cutting measures based on my transactions."</div><span class="qcard-tag partial">AI Recommendations</span></div>
-    <div class="qcard"><span class="qcard-num">96</span><div class="qcard-text">"Identify anomalies in my financial transactions."</div><span class="qcard-tag supported">Anomaly Detection</span></div>
-    <div class="qcard"><span class="qcard-num">97</span><div class="qcard-text">"How much have I paid in taxes from my bank transactions?"</div><span class="qcard-tag supported">Tax Keyword · Sum</span></div>
-    <div class="qcard"><span class="qcard-num">98</span><div class="qcard-text">"What are my top 10 merchants by total spending?"</div><span class="qcard-tag supported">Merchant Rank · Top-N</span></div>
-    <div class="qcard"><span class="qcard-num">99</span><div class="qcard-text">"Can you summarize my entire financial year in highlights?"</div><span class="qcard-tag supported">Annual Summary · Semantic</span></div>
-    <div class="qcard"><span class="qcard-num">100</span><div class="qcard-text">"Generate a report on my financial habits with improvement suggestions."</div><span class="qcard-tag partial">AI Report · Roadmap</span></div>
+    <div class="qcard"><span class="qcard-num">51</span><div class="qcard-text">"Analyze the impact of AI on employment"</div><span class="qcard-tag supported">Analysis · Economic</span></div>
+    <div class="qcard"><span class="qcard-num">52</span><div class="qcard-text">"What are the ethical concerns with facial recognition?"</div><span class="qcard-tag supported">Ethics · Technology</span></div>
+    <div class="qcard"><span class="qcard-num">53</span><div class="qcard-text">"Compare capitalism vs socialism"</div><span class="qcard-tag supported">Political Comparison</span></div>
+    <div class="qcard"><span class="qcard-num">54</span><div class="qcard-text">"What is the philosophy behind stoicism?"</div><span class="qcard-tag supported">Philosophy</span></div>
+    <div class="qcard"><span class="qcard-num">55</span><div class="qcard-text">"Explain the theory of relativity simply"</div><span class="qcard-tag supported">Science · Simplified</span></div>
+    <div class="qcard"><span class="qcard-num">56</span><div class="qcard-text">"What are the main arguments for universal basic income?"</div><span class="qcard-tag supported">Policy Debate</span></div>
+    <div class="qcard"><span class="qcard-num">57</span><div class="qcard-text">"How does the stock market work?"</div><span class="qcard-tag supported">Finance Education</span></div>
+    <div class="qcard"><span class="qcard-num">58</span><div class="qcard-text">"What is the future of remote work?"</div><span class="qcard-tag supported">Trend Analysis</span></div>
+    <div class="qcard"><span class="qcard-num">59</span><div class="qcard-text">"Explain CRISPR gene editing technology"</div><span class="qcard-tag supported">Biotech · Advanced</span></div>
+    <div class="qcard"><span class="qcard-num">60</span><div class="qcard-text">"What are the pros and cons of nuclear energy?"</div><span class="qcard-tag supported">Energy Debate</span></div>
+    <div class="qcard"><span class="qcard-num">61</span><div class="qcard-text">"How will autonomous vehicles change transportation?"</div><span class="qcard-tag partial">Future Prediction</span></div>
+    <div class="qcard"><span class="qcard-num">62</span><div class="qcard-text">"What is the relationship between gut health and mental health?"</div><span class="qcard-tag supported">Health Research</span></div>
+    <div class="qcard"><span class="qcard-num">63</span><div class="qcard-text">"Explain the causes of the 2008 financial crisis"</div><span class="qcard-tag supported">History · Finance</span></div>
+    <div class="qcard"><span class="qcard-num">64</span><div class="qcard-text">"What is digital privacy and why does it matter?"</div><span class="qcard-tag supported">Privacy · Tech</span></div>
+    <div class="qcard"><span class="qcard-num">65</span><div class="qcard-text">"How do vaccines work in the immune system?"</div><span class="qcard-tag supported">Science Explanation</span></div>
+    <div class="qcard"><span class="qcard-num">66</span><div class="qcard-text">"What is the dark web and how does it work?"</div><span class="qcard-tag supported">Internet Security</span></div>
+    <div class="qcard"><span class="qcard-num">67</span><div class="qcard-text">"Analyze the effects of social media on teenagers"</div><span class="qcard-tag supported">Social Impact</span></div>
+    <div class="qcard"><span class="qcard-num">68</span><div class="qcard-text">"What is cryptocurrency and should I invest?"</div><span class="qcard-tag partial">Finance · Advice</span></div>
+    <div class="qcard"><span class="qcard-num">69</span><div class="qcard-text">"How does 5G technology differ from 4G?"</div><span class="qcard-tag supported">Tech Comparison</span></div>
+    <div class="qcard"><span class="qcard-num">70</span><div class="qcard-text">"What are the long-term effects of climate change?"</div><span class="qcard-tag supported">Environmental Science</span></div>
+    <div class="qcard"><span class="qcard-num">71</span><div class="qcard-text">"Explain quantum entanglement in simple terms"</div><span class="qcard-tag supported">Physics · Simplified</span></div>
+    <div class="qcard"><span class="qcard-num">72</span><div class="qcard-text">"What is the gig economy and what are its implications?"</div><span class="qcard-tag supported">Economy Analysis</span></div>
+    <div class="qcard"><span class="qcard-num">73</span><div class="qcard-text">"How do neural networks learn from data?"</div><span class="qcard-tag supported">ML Explanation</span></div>
+    <div class="qcard"><span class="qcard-num">74</span><div class="qcard-text">"What is the history of the internet?"</div><span class="qcard-tag supported">Tech History</span></div>
+    <div class="qcard"><span class="qcard-num">75</span><div class="qcard-text">"Explain how photosynthesis works"</div><span class="qcard-tag supported">Biology</span></div>
+    <div class="qcard"><span class="qcard-num">76</span><div class="qcard-text">"What are the main theories of personality in psychology?"</div><span class="qcard-tag supported">Psychology</span></div>
+    <div class="qcard"><span class="qcard-num">77</span><div class="qcard-text">"How do search engines rank websites?"</div><span class="qcard-tag supported">SEO · Technical</span></div>
+    <div class="qcard"><span class="qcard-num">78</span><div class="qcard-text">"What is the future of space colonization?"</div><span class="qcard-tag partial">Future Tech</span></div>
+    <div class="qcard"><span class="qcard-num">79</span><div class="qcard-text">"Explain the water cycle"</div><span class="qcard-tag supported">Science Basic</span></div>
+    <div class="qcard"><span class="qcard-num">80</span><div class="qcard-text">"What is cultural relativism in anthropology?"</div><span class="qcard-tag supported">Culture Study</span></div>
+    <div class="qcard"><span class="qcard-num">81</span><div class="qcard-text">"How does encryption protect our data?"</div><span class="qcard-tag supported">Security Tech</span></div>
+    <div class="qcard"><span class="qcard-num">82</span><div class="qcard-text">"What is the relationship between diet and longevity?"</div><span class="qcard-tag supported">Health Research</span></div>
+    <div class="qcard"><span class="qcard-num">83</span><div class="qcard-text">"Explain supply and demand in economics"</div><span class="qcard-tag supported">Economics Basic</span></div>
+    <div class="qcard"><span class="qcard-num">84</span><div class="qcard-text">"What is cognitive behavioral therapy?"</div><span class="qcard-tag supported">Psychology</span></div>
+    <div class="qcard"><span class="qcard-num">85</span><div class="qcard-text">"How do streaming services recommend content?"</div><span class="qcard-tag supported">AI · Recommendation</span></div>
+    <div class="qcard"><span class="qcard-num">86</span><div class="qcard-text">"What is the role of central banks in economy?"</div><span class="qcard-tag supported">Finance</span></div>
+    <div class="qcard"><span class="qcard-num">87</span><div class="qcard-text">"Explain the Higgs boson in simple terms"</div><span class="qcard-tag supported">Physics</span></div>
+    <div class="qcard"><span class="qcard-num">88</span><div class="qcard-text">"What is digital transformation in business?"</div><span class="qcard-tag supported">Business Tech</span></div>
+    <div class="qcard"><span class="qcard-num">89</span><div class="qcard-text">"How do antibiotics kill bacteria?"</div><span class="qcard-tag supported">Medicine</span></div>
+    <div class="qcard"><span class="qcard-num">90</span><div class="qcard-text">"What is the difference between weather and climate?"</div><span class="qcard-tag supported">Science Basic</span></div>
+    <div class="qcard"><span class="qcard-num">91</span><div class="qcard-text">"Predict how AI will change healthcare in 10 years"</div><span class="qcard-tag partial">Future Prediction</span></div>
+    <div class="qcard"><span class="qcard-num">92</span><div class="qcard-text">"What is the psychology behind habit formation?"</div><span class="qcard-tag supported">Behavioral Science</span></div>
+    <div class="qcard"><span class="qcard-num">93</span><div class="qcard-text">"How does virtual reality affect human perception?"</div><span class="qcard-tag supported">Tech Research</span></div>
+    <div class="qcard"><span class="qcard-num">94</span><div class="qcard-text">"What are the main challenges in curing cancer?"</div><span class="qcard-tag supported">Medical Research</span></div>
+    <div class="qcard"><span class="qcard-num">95</span><div class="qcard-text">"Explain how touch screens work"</div><span class="qcard-tag supported">Technology</span></div>
+    <div class="qcard"><span class="qcard-num">96</span><div class="qcard-text">"What is the economic impact of automation?"</div><span class="qcard-tag supported">Economics</span></div>
+    <div class="qcard"><span class="qcard-num">97</span><div class="qcard-text">"How do satellites stay in orbit?"</div><span class="qcard-tag supported">Space Science</span></div>
+    <div class="qcard"><span class="qcard-num">98</span><div class="qcard-text">"What is the relationship between sleep and memory?"</div><span class="qcard-tag supported">Neuroscience</span></div>
+    <div class="qcard"><span class="qcard-num">99</span><div class="qcard-text">"Explain the concept of infinity in mathematics"</div><span class="qcard-tag supported">Math Concepts</span></div>
+    <div class="qcard"><span class="qcard-num">100</span><div class="qcard-text">"What will society look like in 2050?"</div><span class="qcard-tag partial">Future Studies</span></div>
   </div>
 
   <div style="margin-top:2rem; display:flex; gap:1.5rem; align-items:center; font-size:0.72rem; color:var(--muted)">
